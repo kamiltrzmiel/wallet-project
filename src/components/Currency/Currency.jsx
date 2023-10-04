@@ -1,4 +1,22 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {
+  selectCurrency,
+  //   selectIsLoading,
+  //   selectError,
+} from 'redux/currency/selectors';
+import { fetchCurrency } from 'redux/currency/operations';
+
 export const Currency = () => {
+  const dispatch = useDispatch();
+  const rates = useSelector(selectCurrency);
+  // const isLoading = useSelector(selectIsLoading);
+  // const error = useSelector(selectError);
+
+  useEffect(() => {
+    dispatch(fetchCurrency());
+  }, [dispatch]);
+
   return (
     <table>
       <thead>
@@ -10,16 +28,13 @@ export const Currency = () => {
       </thead>
 
       <tbody>
-        <tr>
-          <td>USD</td>
-          <td>1</td>
-          <td>1</td>
-        </tr>
-        <tr>
-          <td>EUR</td>
-          <td>0,5</td>
-          <td>0,4</td>
-        </tr>
+        {rates.map((item, index) => (
+          <tr key={index}>
+            <td>{item.currency}</td>
+            <td>{item.purchase}</td>
+            <td>{item.sale}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
