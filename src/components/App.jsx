@@ -8,7 +8,7 @@ const Login = lazy(() => import('pages/LoginPage/LoginPage'));
 const Statistic = lazy(() => import('pages/statistic/PH_statistic'));
 const Currency = lazy(() => import('pages/currency/PH_currency'));
 
-const isAuth = false;
+const isAuth = true;
 
 export const App = () => {
   return (
