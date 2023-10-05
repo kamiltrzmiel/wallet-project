@@ -22,4 +22,3 @@ export const App = () => {
       </Routes>
     </Suspense>
   );
-};
