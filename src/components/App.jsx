@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import Navigation from './Navigation/Navigation';
 
 const Home = lazy(() => import('pages/dashboard/PH_dashboard'));
 const Register = lazy(() => import('pages/register/PH_register'));
@@ -21,7 +20,6 @@ export const App = () => {
 
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-      <Navigation />
     </Suspense>
   );
 };
