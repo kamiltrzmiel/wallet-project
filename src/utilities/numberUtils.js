@@ -4,12 +4,12 @@ const validateNumber = number => {
   }
 };
 
-export const fixDigitsToTwoDecimalPlaces = number => {
+export const fixToTwoDecimals = number => {
   validateNumber(number);
   return parseFloat(number.toFixed(2));
 };
 
-export const formatNumberWithSpaces = number => {
+export const formatWithSpaces = number => {
   validateNumber(number);
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 };
@@ -37,5 +37,5 @@ export const formatBalance = num => {
   if (Math.abs(num) > 10000000) {
     return formatCompactNumber(num);
   }
-  return formatNumberWithSpaces(fixDigitsToTwoDecimalPlaces(num));
+  return formatWithSpaces(fixToTwoDecimals(num));
 };
