@@ -1,19 +1,28 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchTotals } from 'redux/slices/financeSlice';
 import {
   BalanceSection,
   BalanceParagraph,
   AmountParagraph,
-  ValueHolder,
+  AmountHolder,
 } from './Balance.styled';
-
+import { formatBalance } from 'utilities/numberUtils';
 
 const Balance = () => {
+  const dispatch = useDispatch();
+  const { difference } = useSelector(state => state.finance.totals);
+  const balance = difference || 0;
+
+  useEffect(() => {
+    dispatch(fetchTotals());
+  }, [dispatch]);
+
   return (
     <BalanceSection>
       <BalanceParagraph>Your Balance</BalanceParagraph>
       <AmountParagraph>
-        <ValueHolder>$</ValueHolder> 
+        <AmountHolder>$</AmountHolder> {formatBalance(balance)}
       </AmountParagraph>
     </BalanceSection>
   );
