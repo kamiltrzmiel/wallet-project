@@ -8,6 +8,8 @@ const Login = lazy(() => import('pages/LoginPage/LoginPage'));
 const Statistic = lazy(() => import('pages/statistic/PH_statistic'));
 const Currency = lazy(() => import('pages/currency/PH_currency'));
 
+const isAuth = true;
+
 export const App = () => {
   return (
     <Suspense>
@@ -15,9 +17,16 @@ export const App = () => {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/home" element={<Home />} /> */}
-        <Route path="/diagram" element={<Statistic />} />
-        <Route path="/currency" element={<Currency />} />
+
+        {isAuth ? (
+          <Route>
+            {/* <Route path="/home" element={<Home />} /> */}
+            <Route path="/diagram" element={<Statistic />} />
+            <Route path="/currency" element={<Currency />} />
+          </Route>
+        ) : (
+          <Route path="*" element={<Navigate to="/login" />} />
+        )}
 
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
