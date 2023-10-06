@@ -6,7 +6,7 @@ import {
   //   selectError,
 } from 'redux/currency/selectors';
 import { fetchCurrency } from 'redux/currency/operations';
-import { StyledTable, StyledTh, StyledTd } from './Currency.styled';
+import { StyledTable, StyledTh, StyledTd, StyledTr } from './Currency.styled';
 
 export const Currency = () => {
   const dispatch = useDispatch();
@@ -21,20 +21,20 @@ export const Currency = () => {
   return (
     <StyledTable>
       <thead>
-        <tr>
+        <StyledTr>
           <StyledTh>Currency</StyledTh>
           <StyledTh>Purchase</StyledTh>
           <StyledTh>Sale</StyledTh>
-        </tr>
+        </StyledTr>
       </thead>
 
       <tbody>
         {rates.map((item, index) => (
-          <tr key={index}>
+          <StyledTr key={index}>
             <StyledTd>{item.currency}</StyledTd>
             <StyledTd>{item.purchase}</StyledTd>
             <StyledTd>{item.sale}</StyledTd>
-          </tr>
+          </StyledTr>
         ))}
       </tbody>
     </StyledTable>

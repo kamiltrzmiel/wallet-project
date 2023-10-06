@@ -33,14 +33,62 @@ export const StyledTable = styled.table`
     left: 0;
     background-image: url(${bottomBg});
   }
+
+  @media (min-width: 768px) {
+    min-width: 336px;
+    padding-bottom: 56px;
+
+    &::before {
+      top: -5px;
+      background-size: contain;
+    }
+
+    &::after {
+      background-size: cover;
+      height: 50%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    min-width: 393px;
+    padding: 17px 60px 100px;
+
+    &::before {
+      top: -8px;
+    }
+    &::after {
+      height: 35%;
+    }
+  }
+`;
+
+export const StyledTr = styled.tr`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const StyledTh = styled.th`
   padding-bottom: 12px;
   font-size: 18px;
-  font-weight: 700;
+
+  @media (min-width: 768px) {
+    &:nth-child(2) {
+      margin-left: -30px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    &:first-child {
+      margin-left: -14px;
+      margin-right: 8px;
+    }
+  }
 `;
 
 export const StyledTd = styled.td`
   padding-top: 12px;
+
+  @media (min-width: 1280px) {
+    padding-top: 24px;
+  }
 `;
