@@ -1,5 +1,7 @@
+import { Currency } from 'components/Currency';
+
 const PH_currency = () => {
-  return <p>Currency Placeholder</p>;
+  return <Currency />;
 };
 
 export default PH_currency;
