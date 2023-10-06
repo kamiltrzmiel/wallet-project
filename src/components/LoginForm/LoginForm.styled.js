@@ -15,6 +15,7 @@ export const Logo = styled.div`
   align-items: center;
   justify-content: center;
   gap: 15.5px;
+  margin-bottom: 60px;
 
   span {
     font-weight: bold;
