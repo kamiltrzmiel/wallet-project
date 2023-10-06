@@ -1,10 +1,17 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import wallet from '../../assets/icons/wallet/wallet.png';
 import icons from '../../assets/icons/login/icons.svg';
+import {
+  FormikForm,
+  FormikField,
+  Logo,
+  StyledIcon,
+  FormGroup,
+  Error,
+} from './LoginForm.styled';
 
-// Schema walidacji z yup
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email('Nieprawidłowy adres e-mail')
@@ -28,48 +35,46 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="login-form">
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <div className="wallet">
-            <img src={wallet} alt="wallet" />
-            <p>Wallet</p>
-          </div>
-          <div className="form-group">
-            <svg className="icon" width="21" height="16">
-              <use xlinkHref={`${icons}#message`} fill="#E0E0E0" />
-            </svg>
-            <Field
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Wprowadź e-mail"
-            />
-            <ErrorMessage name="email" component="div" className="error" />
-          </div>
-          <div className="form-group">
-            <svg className="icon" width="17" height="21">
-              <use xlinkHref={`${icons}#password`} fill="#E0E0E0" />
-            </svg>
-            <Field
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Wprowadź hasło"
-            />
-            <ErrorMessage name="password" component="div" className="error" />
-          </div>
-          <div className="button-group">
-            <button type="submit">Zaloguj</button>
-            <button type="button">Zarejestruj</button>
-          </div>
-        </Form>
-      </Formik>
-    </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      <FormikForm autoComplete="off">
+        <Logo>
+          <img src={wallet} alt="wallet" />
+          <span>Wallet</span>
+        </Logo>
+        <FormGroup>
+          <StyledIcon width="21" height="16">
+            <use xlinkHref={`${icons}#message`} />
+          </StyledIcon>
+          <FormikField
+            type="email"
+            id="email"
+            name="email"
+            placeholder="E-mail"
+          />
+          <Error name="email" component="div" />
+        </FormGroup>
+        <FormGroup>
+          <StyledIcon width="17" height="21">
+            <use xlinkHref={`${icons}#password`} />
+          </StyledIcon>
+          <FormikField
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+          />
+          <Error name="password" component="div" />
+        </FormGroup>
+        <div className="button-group">
+          <button type="submit">Zaloguj</button>
+          <button type="button">Zarejestruj</button>
+        </div>
+      </FormikForm>
+    </Formik>
   );
 };
 
