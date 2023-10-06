@@ -30,10 +30,13 @@ export const FormikField = styled(Field)`
   font-style: normal;
   font-weight: 400;
   line-height: 1.33;
-
   width: 225.5px;
-
   padding: 3.54px 0px 3.54px 54.5px;
+  background-color: #fff;
+  &:focus {
+    outline: none;
+    background-color: transparent;
+  }
 `;
 
 export const FormGroup = styled.div`
