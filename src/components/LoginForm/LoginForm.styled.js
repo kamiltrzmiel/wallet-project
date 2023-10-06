@@ -57,3 +57,16 @@ export const Error = styled(ErrorMessage)`
   color: red;
   margin-top: 5px;
 `;
+
+export const LogIn = styled.button`
+  background-color: #24cca7;
+  outline: none;
+  border: 1px #000 solid;
+  border-radius: 20px;
+  min-width: 280px;
+  font-size: 18px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: circle;
+  padding: 13px 98px;
+`;

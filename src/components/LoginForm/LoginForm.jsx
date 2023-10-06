@@ -10,6 +10,7 @@ import {
   StyledIcon,
   FormGroup,
   Error,
+  LogIn,
 } from './LoginForm.styled';
 
 const validationSchema = Yup.object().shape({
@@ -69,10 +70,9 @@ const LoginForm = () => {
           />
           <Error name="password" component="div" />
         </FormGroup>
-        <div className="button-group">
-          <button type="submit">Zaloguj</button>
-          <button type="button">Zarejestruj</button>
-        </div>
+
+        <LogIn type="submit">Log In</LogIn>
+        <button type="button">Zarejestruj</button>
       </FormikForm>
     </Formik>
   );
