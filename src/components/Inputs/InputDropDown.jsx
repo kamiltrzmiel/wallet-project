@@ -1,5 +1,5 @@
 import { Icon } from 'components/Icon/Icon';
-import { StyledSelect } from './InputDropdown.styled';
+import { StyledSelect } from './InputDropDown.styled';
 
 const InputDropDown = ({ options, title, onChange }) => {
   return (
