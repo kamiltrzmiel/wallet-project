@@ -11,4 +11,18 @@ export const Wrapper = styled.div`
     font-size: 30px;
     text-transform: capitalize;
   }
+
+  svg {
+    width: 261px;
+    height: 250px;
+  }
+  @media (min-width: 1280px) {
+    flex-direction: column;
+    margin-left: 76px;
+    margin-right: 37.8px;
+    svg {
+      width: 435.2px;
+      height: 419.5px;
+    }
+  }
 `;

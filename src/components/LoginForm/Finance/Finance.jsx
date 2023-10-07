@@ -5,7 +5,7 @@ import { Wrapper } from './Finance.styled';
 const Finance = () => {
   return (
     <Wrapper id="wraper finance">
-      <svg width="261" height="250">
+      <svg>
         <use xlinkHref={`${icons}#frame`} />
       </svg>
       <span>Finance App</span>

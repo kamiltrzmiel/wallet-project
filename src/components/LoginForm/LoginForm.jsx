@@ -14,6 +14,7 @@ import {
   StyledLink,
   Wrapper,
   StyledFinance,
+  Container,
 } from './LoginForm.styled';
 
 const validationSchema = Yup.object().shape({
@@ -65,41 +66,43 @@ const LoginForm = () => {
     >
       <FormikForm autoComplete="off">
         {showFinance && <StyledFinance />}
-        <Wrapper>
-          <Logo>
-            <svg>
-              <use xlinkHref={`${icons}#wallet`} />
-            </svg>
-            <span>Wallet</span>
-          </Logo>
-          <FormGroup>
-            <StyledIcon width="21" height="16">
-              <use xlinkHref={`${icons}#message`} />
-            </StyledIcon>
-            <FormikField
-              type="email"
-              id="email"
-              name="email"
-              placeholder="E-mail"
-            />
-            <ErrorMsg name="email" component="div" />
-          </FormGroup>
-          <FormGroup>
-            <StyledIcon width="17" height="21">
-              <use xlinkHref={`${icons}#password`} />
-            </StyledIcon>
-            <FormikField
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-            />
-            <ErrorMsg name="password" component="div" />
-          </FormGroup>
+        <Container>
+          <Wrapper>
+            <Logo>
+              <svg>
+                <use xlinkHref={`${icons}#wallet`} />
+              </svg>
+              <span>Wallet</span>
+            </Logo>
+            <FormGroup>
+              <StyledIcon width="21" height="16">
+                <use xlinkHref={`${icons}#message`} />
+              </StyledIcon>
+              <FormikField
+                type="email"
+                id="email"
+                name="email"
+                placeholder="E-mail"
+              />
+              <ErrorMsg name="email" component="div" />
+            </FormGroup>
+            <FormGroup>
+              <StyledIcon width="17" height="21">
+                <use xlinkHref={`${icons}#password`} />
+              </StyledIcon>
+              <FormikField
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+              <ErrorMsg name="password" component="div" />
+            </FormGroup>
 
-          <LogIn type="submit">Log In</LogIn>
-          <StyledLink to="/register">Register</StyledLink>
-        </Wrapper>
+            <LogIn type="submit">Log In</LogIn>
+            <StyledLink to="/register">Register</StyledLink>
+          </Wrapper>
+        </Container>
       </FormikForm>
     </Formik>
   );

@@ -8,6 +8,9 @@ export const FormikForm = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (min-width: 1280px) {
+    flex-direction: row;
+  }
 `;
 
 export const Logo = styled.div`
@@ -120,20 +123,30 @@ export const StyledLink = styled(NavLink)`
     margin-bottom: 56px;
   }
 `;
+export const Container = styled.div`
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
 
 export const Wrapper = styled.div`
-  z-index: 100;
+  z-index: 101;
   background-color: #fff;
-  margin: 0 auto;
+  padding: 20px;
+  border-radius: 20px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
+
   @media screen and (min-width: 768px) {
     width: 533px;
-    border-radius: 20px;
-    height: auto;
   }
 `;
 
