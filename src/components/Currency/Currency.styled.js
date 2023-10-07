@@ -37,6 +37,7 @@ export const StyledTable = styled.table`
   @media (min-width: 768px) {
     min-width: 336px;
     padding-bottom: 56px;
+    box-shadow: none;
 
     &::before {
       top: -5px;

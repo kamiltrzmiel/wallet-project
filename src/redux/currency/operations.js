@@ -1,30 +1,14 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { getRatesFromLS } from 'utilities/getRatesFromLS';
 
 export const fetchCurrency = createAsyncThunk(
   'currency/fetchAll',
   async (_, thunkAPI) => {
-    const savedRates = localStorage.getItem('savedRates');
+    const savedRates = getRatesFromLS();
 
     if (savedRates) {
-      try {
-        const savedRatesJSON = JSON.parse(savedRates);
-
-        if (savedRatesJSON) {
-          const savedTimestamp = new Date(savedRatesJSON.timestamp);
-          const currentTimestamp = new Date();
-
-          const timeDifference =
-            currentTimestamp.getTime() - savedTimestamp.getTime();
-          const oneHour = 3600000;
-
-          if (timeDifference < oneHour) {
-            return savedRatesJSON.rates;
-          }
-        }
-      } catch (error) {
-        console.error('There is something wrong with saved data');
-      }
+      return savedRates;
     } else {
       try {
         const response = await axios.get(

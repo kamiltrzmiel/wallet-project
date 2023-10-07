@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {
   selectCurrency,
-  //   selectIsLoading,
+  // selectIsLoading,
   //   selectError,
 } from 'redux/currency/selectors';
 import { fetchCurrency } from 'redux/currency/operations';
@@ -19,24 +19,26 @@ export const Currency = () => {
   }, [dispatch]);
 
   return (
-    <StyledTable>
-      <thead>
-        <StyledTr>
-          <StyledTh>Currency</StyledTh>
-          <StyledTh>Purchase</StyledTh>
-          <StyledTh>Sale</StyledTh>
-        </StyledTr>
-      </thead>
-
-      <tbody>
-        {rates.map((item, index) => (
-          <StyledTr key={index}>
-            <StyledTd>{item.currency}</StyledTd>
-            <StyledTd>{item.purchase}</StyledTd>
-            <StyledTd>{item.sale}</StyledTd>
+    <>
+      <StyledTable>
+        <thead>
+          <StyledTr>
+            <StyledTh>Currency</StyledTh>
+            <StyledTh>Purchase</StyledTh>
+            <StyledTh>Sale</StyledTh>
           </StyledTr>
-        ))}
-      </tbody>
-    </StyledTable>
+        </thead>
+
+        <tbody>
+          {rates.map((item, index) => (
+            <StyledTr key={index}>
+              <StyledTd>{item.currency}</StyledTd>
+              <StyledTd>{item.purchase}</StyledTd>
+              <StyledTd>{item.sale}</StyledTd>
+            </StyledTr>
+          ))}
+        </tbody>
+      </StyledTable>
+    </>
   );
 };
