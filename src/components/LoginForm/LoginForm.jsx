@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import icons from '../../assets/icons/login/icons.svg';
+
 import {
   FormikForm,
   FormikField,
@@ -12,6 +13,7 @@ import {
   LogIn,
   StyledLink,
   Wrapper,
+  StyledFinance,
 } from './LoginForm.styled';
 
 const validationSchema = Yup.object().shape({
@@ -30,6 +32,25 @@ const LoginForm = () => {
     password: '',
   };
 
+  const [showFinance, setShowFinance] = useState(false);
+
+  useEffect(() => {
+    const checkScreenWidth = () => {
+      if (window.innerWidth >= 768) {
+        setShowFinance(true);
+      } else {
+        setShowFinance(false);
+      }
+    };
+
+    checkScreenWidth();
+    window.addEventListener('resize', checkScreenWidth);
+
+    return () => {
+      window.removeEventListener('resize', checkScreenWidth);
+    };
+  }, []);
+
   const handleSubmit = (values, { setSubmitting }) => {
     // logika obsługi logowania
     console.log('Dane logowania:', values);
@@ -43,6 +64,7 @@ const LoginForm = () => {
       onSubmit={handleSubmit}
     >
       <FormikForm autoComplete="off">
+        {showFinance && <StyledFinance />}
         <Wrapper>
           <Logo>
             <svg>

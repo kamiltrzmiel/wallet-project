@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
+import Finance from './Finance/Finance';
 
 export const FormikForm = styled(Form)`
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 
@@ -127,8 +129,12 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
   @media screen and (min-width: 768px) {
     width: 533px;
     border-radius: 20px;
+    height: auto;
   }
 `;
+
+export const StyledFinance = styled(Finance)``;
