@@ -94,7 +94,7 @@ export const StyledTd = styled.td`
   }
 `;
 
-export const CurrencyLoaderBox = styled.div`
+export const CurrencyBox = styled.div`
   background-color: #4a56e2;
   border-radius: 30px;
   max-width: 280px;
@@ -172,5 +172,15 @@ export const CurrencyLoader = styled.div`
     100% {
       transform: rotate(360deg);
     }
+  }
+`;
+
+export const ErrorMsg = styled.p`
+  color: #fff;
+  font-style: italic;
+  text-align: center;
+
+  @media (min-width: 1280px) {
+    font-size: 20px;
   }
 `;

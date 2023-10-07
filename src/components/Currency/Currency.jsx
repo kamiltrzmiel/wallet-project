@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import {
   selectCurrency,
   selectIsLoading,
-  //   selectError,
+  selectError,
 } from 'redux/currency/selectors';
 import { fetchCurrency } from 'redux/currency/operations';
 import {
@@ -11,15 +11,16 @@ import {
   StyledTh,
   StyledTd,
   StyledTr,
-  CurrencyLoaderBox,
+  CurrencyBox,
   CurrencyLoader,
+  ErrorMsg,
 } from './Currency.styled';
 
 export const Currency = () => {
   const dispatch = useDispatch();
   const rates = useSelector(selectCurrency);
   const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchCurrency());
@@ -28,9 +29,9 @@ export const Currency = () => {
   return (
     <>
       {isLoading && (
-        <CurrencyLoaderBox>
+        <CurrencyBox>
           <CurrencyLoader>-$-</CurrencyLoader>
-        </CurrencyLoaderBox>
+        </CurrencyBox>
       )}
       {rates.length > 1 && (
         <StyledTable>
@@ -52,6 +53,13 @@ export const Currency = () => {
             ))}
           </tbody>
         </StyledTable>
+      )}
+      {error && (
+        <CurrencyBox>
+          <ErrorMsg>
+            Sorry, there was an error retrieving current exchange rate data :c
+          </ErrorMsg>
+        </CurrencyBox>
       )}
     </>
   );
