@@ -1,18 +1,30 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import wallet from '../../assets/icons/wallet/wallet.png';
 import icons from '../../assets/icons/login/icons.svg';
 
-// Schema walidacji z yup
+import {
+  FormikForm,
+  FormikField,
+  Logo,
+  StyledIcon,
+  FormGroup,
+  ErrorMsg,
+  LogIn,
+  StyledLink,
+  Wrapper,
+  StyledFinance,
+  Container,
+} from './LoginForm.styled';
+
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Nieprawidłowy adres e-mail')
-    .required('To pole jest wymagane'),
+    .email('Incorrect e-mail address')
+    .required('This field is required'),
   password: Yup.string()
-    .min(6, 'Hasło musi mieć co najmniej 6 znaków')
-    .max(12, 'Hasło nie może mieć więcej niż 12 znaków')
-    .required('To pole jest wymagane'),
+    .min(6, 'The password must be at least 6 characters long')
+    .max(12, 'The password cannot be longer than 12 characters')
+    .required('This field is required'),
 });
 
 const LoginForm = () => {
@@ -21,6 +33,25 @@ const LoginForm = () => {
     password: '',
   };
 
+  const [showFinance, setShowFinance] = useState(false);
+
+  useEffect(() => {
+    const checkScreenWidth = () => {
+      if (window.innerWidth >= 768) {
+        setShowFinance(true);
+      } else {
+        setShowFinance(false);
+      }
+    };
+
+    checkScreenWidth();
+    window.addEventListener('resize', checkScreenWidth);
+
+    return () => {
+      window.removeEventListener('resize', checkScreenWidth);
+    };
+  }, []);
+
   const handleSubmit = (values, { setSubmitting }) => {
     // logika obsługi logowania
     console.log('Dane logowania:', values);
@@ -28,48 +59,52 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="login-form">
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <div className="wallet">
-            <img src={wallet} alt="wallet" />
-            <p>Wallet</p>
-          </div>
-          <div className="form-group">
-            <svg className="icon" width="21" height="16">
-              <use xlinkHref={`${icons}#message`} fill="#E0E0E0" />
-            </svg>
-            <Field
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Wprowadź e-mail"
-            />
-            <ErrorMessage name="email" component="div" className="error" />
-          </div>
-          <div className="form-group">
-            <svg className="icon" width="17" height="21">
-              <use xlinkHref={`${icons}#password`} fill="#E0E0E0" />
-            </svg>
-            <Field
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Wprowadź hasło"
-            />
-            <ErrorMessage name="password" component="div" className="error" />
-          </div>
-          <div className="button-group">
-            <button type="submit">Zaloguj</button>
-            <button type="button">Zarejestruj</button>
-          </div>
-        </Form>
-      </Formik>
-    </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      <FormikForm autoComplete="off">
+        {showFinance && <StyledFinance />}
+        <Container>
+          <Wrapper>
+            <Logo>
+              <svg>
+                <use xlinkHref={`${icons}#wallet`} />
+              </svg>
+              <span>Wallet</span>
+            </Logo>
+            <FormGroup>
+              <StyledIcon width="21" height="16">
+                <use xlinkHref={`${icons}#message`} />
+              </StyledIcon>
+              <FormikField
+                type="email"
+                id="email"
+                name="email"
+                placeholder="E-mail"
+              />
+              <ErrorMsg name="email" component="div" />
+            </FormGroup>
+            <FormGroup>
+              <StyledIcon width="17" height="21">
+                <use xlinkHref={`${icons}#password`} />
+              </StyledIcon>
+              <FormikField
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+              <ErrorMsg name="password" component="div" />
+            </FormGroup>
+
+            <LogIn type="submit">Log In</LogIn>
+            <StyledLink to="/register">Register</StyledLink>
+          </Wrapper>
+        </Container>
+      </FormikForm>
+    </Formik>
   );
 };
 
