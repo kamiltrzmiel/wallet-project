@@ -13,11 +13,7 @@ export const getRatesFromLS = () => {
           currentTimestamp.getTime() - savedTimestamp.getTime();
         const oneHour = 3600000;
 
-        if (timeDifference < oneHour) {
-          return savedRatesJSON.rates;
-        } else {
-          return null;
-        }
+        return timeDifference < oneHour ? savedRatesJSON.rates : null;
       }
     } catch (error) {
       console.error('There is something wrong with saved data');
