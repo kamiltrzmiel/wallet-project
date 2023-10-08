@@ -4,7 +4,7 @@ import globalReducer from './slices/globalSlice';
 import sessionReducer from './slices/sessionSlice';
 import transactionsReducer from './slices/financeSlice';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     currency: currencyReducer,
     global: globalReducer,
@@ -13,3 +13,5 @@ export const store = configureStore({
   },
   devTools: process.env.NODE_ENV === 'development',
 });
+
+export default store;
