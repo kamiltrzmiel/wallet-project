@@ -8,8 +8,9 @@ import {
   getUserProfile,
 } from '../../utilities/api';
 import { refreshTokens, setAuthToken } from 'utilities/authUtils';
-import { resetGlobal, setIsLoading } from './globalSlice';
+import { resetGlobal, setIsLoading, setIsModalLogoutOpen } from './globalSlice';
 import { resetTransactions } from './financeSlice';
+import { resetCurrency } from 'redux/currency/currencySlice';
 
 export const register = createAsyncThunk(
   'session/register',
@@ -59,6 +60,7 @@ export const logout = createAsyncThunk(
       dispatch(setIsLoading(true));
       await logoutUser();
       dispatch(resetGlobal());
+      dispatch(resetCurrency());
       dispatch(resetTransactions());
       dispatch(resetSession());
     } catch (error) {
@@ -67,6 +69,7 @@ export const logout = createAsyncThunk(
       } else {
         toast.error('An unexpected error occurred during logout.');
       }
+      dispatch(setIsModalLogoutOpen(false));
       throw error;
     }
   }

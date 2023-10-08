@@ -1,12 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCurrency } from './operations';
 
+const initialState = {
+  currency: [],
+  isLoading: false,
+  error: null,
+};
+
 const currencySlice = createSlice({
   name: 'currency',
-  initialState: {
-    currency: [],
-    isLoading: false,
-    error: null,
+  initialState,
+  reducers: {
+    reset: () => initialState,
   },
   extraReducers: {
     [fetchCurrency.pending](state, _) {
@@ -24,4 +29,5 @@ const currencySlice = createSlice({
   },
 });
 
-export const currencyReducer = currencySlice.reducer;
+export const { reset: resetCurrency } = currencySlice.actions;
+export default currencySlice.reducer;
