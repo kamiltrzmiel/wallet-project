@@ -5,7 +5,6 @@ import {
   NoBtn,
 } from './ModalLogout.styled';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { setIsModalLogoutOpen } from 'redux/slices/globalSlice';
 import { logout } from 'redux/slices/sessionSlice';
 
@@ -44,11 +43,9 @@ const ModalLogout = () => {
     <ModalContainer onClick={closeModalByClickOutside}>
       <ModalWindow>
         <p>Are you sure you want to log out?</p>
-        <Link to="/login">
-          <YesBtn type="button" onClick={handleLogout}>
-            Yes
-          </YesBtn>
-        </Link>
+        <YesBtn type="button" onClick={handleLogout}>
+          Yes
+        </YesBtn>
         <NoBtn type="button" onClick={closeModal}>
           No
         </NoBtn>
