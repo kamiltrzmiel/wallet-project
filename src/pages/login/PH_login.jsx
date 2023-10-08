@@ -1,7 +1,5 @@
-import AddTransactionModal from 'components/AddTransactionModal/AddTransactionModal';
-
 const PH_login = () => {
-  return <AddTransactionModal />;
+  return <p>Login Placeholder</p>;
 };
 
 export default PH_login;
