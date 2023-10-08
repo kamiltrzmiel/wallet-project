@@ -7,8 +7,12 @@ import { ContainerHeader, HeaderDiv, LogoutDiv } from './Header.styled';
 const Header = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-  const trimmedUserName =
-    user.name.length > 10 ? user.name.slice(0, 10) + '...' : user.name;
+  const trimmedUserName = () => {
+    if (!user.name) {
+      return 'unknown';
+    }
+    return user.name.length > 10 ? user.name.slice(0, 10) + '...' : user.name;
+  };
 
   const openModal = () => {
     dispatch(setIsModalLogoutOpen(true));
@@ -21,7 +25,7 @@ const Header = () => {
         <LogoutDiv>
           <span className="nameText">
             <button className="button" type="button">
-              {trimmedUserName}
+              {trimmedUserName()}
             </button>
           </span>
           <div className="divider button"></div>
