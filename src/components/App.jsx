@@ -10,7 +10,7 @@ const Currency = lazy(() => import('pages/currency/PH_currency'));
 
 const isAuth = true;
 
-export const App = () => {
+const App = () => {
   return (
     <Suspense>
       <Routes>
@@ -33,3 +33,5 @@ export const App = () => {
     </Suspense>
   );
 };
+
+export default App;
