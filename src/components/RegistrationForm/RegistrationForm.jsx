@@ -1,22 +1,36 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
+import icons from '../../assets/icons/login/icons.svg';
+import {
+  FormikForm,
+  FormikField,
+  Logo,
+  StyledIcon,
+  FormGroup,
+  ErrorMsg,
+  Register,
+  StyledLink,
+  Wrapper,
+  StyledFinance,
+  Container,
+} from './RegistrationForm.styled';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Nieprawidłowy adres e-mail')
-    .required('To pole jest wymagane'),
+    .email('Incorrect e-mail address')
+    .required('This field is required'),
   password: Yup.string()
-    .min(6, 'Hasło musi mieć co najmniej 6 znaków')
-    .max(12, 'Hasło nie może mieć więcej niż 12 znaków')
-    .required('To pole jest wymagane'),
+    .min(6, 'The password must be at least 6 characters long')
+    .max(12, 'The password cannot be longer than 12 characters')
+    .required('This field is required'),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Hasła muszą być takie same')
-    .required('To pole jest wymagane'),
+    .oneOf([Yup.ref('password'), null], 'Passwords must be the same')
+    .required('This field is required'),
   firstName: Yup.string()
-    .min(1, 'Imię musi mieć co najmniej 1 znak')
-    .max(12, 'Imię nie może mieć więcej niż 12 znaków')
-    .required('To pole jest wymagane'),
+    .min(1, 'The name must be at least 1 character long')
+    .max(12, 'The name cannot be longer than 12 characters')
+    .required('This field is required'),
 });
 
 const initialValues = {
@@ -32,49 +46,100 @@ const RegistrationForm = () => {
     console.log('Dane formularza:', values);
   };
 
+  const [showFinance, setShowFinance] = useState(false);
+
+  useEffect(() => {
+    const checkScreenWidth = () => {
+      if (window.innerWidth >= 768) {
+        setShowFinance(true);
+      } else {
+        setShowFinance(false);
+      }
+    };
+
+    checkScreenWidth();
+    window.addEventListener('resize', checkScreenWidth);
+
+    return () => {
+      window.removeEventListener('resize', checkScreenWidth);
+    };
+  }, []);
+
   return (
     <div>
-      <img src="" alt="Logo" />
-      {/* podmienić logo! z loginform  */}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <div>
-            <label htmlFor="email">E-mail</label>
-            <Field type="email" id="email" name="email" />
-            <svg id="message" /* Tu dodać definicję SVG z loginform*/ />
-            <ErrorMessage name="email" component="div" />
-          </div>
+        <FormikForm>
+          {showFinance && <StyledFinance />}
+          <Container>
+            <Wrapper>
+              <Logo>
+                <svg>
+                  <use xlinkHref={`${icons}#wallet`} />
+                </svg>
+                <span>Wallet</span>
+              </Logo>
 
-          <div>
-            <label htmlFor="password">Hasło</label>
-            <Field type="password" id="password" name="password" />
-            <ErrorMessage name="password" component="div" />
-          </div>
+              <FormGroup>
+                <StyledIcon width="21" height="16">
+                  <use xlinkHref={`${icons}#message`} />
+                </StyledIcon>
+                <FormikField
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="E-mail"
+                />
+                <ErrorMsg name="email" component="div" />
+              </FormGroup>
 
-          <div>
-            <label htmlFor="confirmPassword">Potwierdź hasło</label>
-            <Field
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-            />
-            <ErrorMessage name="confirmPassword" component="div" />
-          </div>
+              <FormGroup>
+                <StyledIcon width="17" height="21">
+                  <use xlinkHref={`${icons}#password`} />
+                </StyledIcon>
+                <FormikField
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                />
+                <ErrorMsg name="password" component="div" />
+              </FormGroup>
 
-          <div>
-            <label htmlFor="firstName">Imię</label>
-            <Field type="text" id="firstName" name="firstName" />
-            <ErrorMessage name="firstName" component="div" />
-          </div>
+              <FormGroup>
+                <StyledIcon width="17" height="21">
+                  <use xlinkHref={`${icons}#password`} />
+                </StyledIcon>
+                <FormikField
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="confirm Password"
+                />
+                <ErrorMsg name="confirmPassword" component="div" />
+              </FormGroup>
 
-          <button type="submit">Zarejestruj</button>
-        </Form>
+              <FormGroup>
+                <StyledIcon width="17" height="21">
+                  <use xlinkHref={`${icons}#firstname`} />
+                </StyledIcon>
+                <FormikField
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="first name"
+                />
+                <ErrorMsg name="firstName" component="div" />
+              </FormGroup>
+              <Register type="submit">Zarejestruj</Register>
+              <StyledLink to="/login">Log In</StyledLink>
+            </Wrapper>
+          </Container>
+        </FormikForm>
       </Formik>
-      <button type="button">Zaloguj</button>
     </div>
   );
 };
