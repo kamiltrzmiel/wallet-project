@@ -5,7 +5,7 @@ import { getRatesFromLS } from 'utilities/getRatesFromLS';
 export const fetchCurrency = createAsyncThunk(
   'currency/fetchAll',
   async (_, thunkAPI) => {
-    const savedRates = getRatesFromLS();
+    const savedRates = await getRatesFromLS();
 
     if (savedRates) {
       return savedRates;
