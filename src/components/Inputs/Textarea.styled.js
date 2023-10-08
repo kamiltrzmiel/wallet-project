@@ -33,4 +33,43 @@ export const StyledTextarea = styled.textarea`
 
   @media (max-width: 767px) {
     height: auto;
-    `;
+    min-height: 85px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-logout-button);
+    }
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--color-logout-button);
+    }
+
+    mask-image: linear-gradient(to top, transparent, var(--font-color-dark)),
+      linear-gradient(to left, transparent 4px, var(--font-color-dark) 4px);
+    mask-size: 100% 20000px;
+    mask-position: left bottom;
+    -webkit-mask-image: linear-gradient(
+        to top,
+        transparent,
+        var(--font-color-dark)
+      ),
+      linear-gradient(to left, transparent 4px, var(--font-color-dark) 4px);
+    -webkit-mask-size: 100% 20000px;
+    -webkit-mask-position: left bottom;
+    transition: mask-position 0.3s, -webkit-mask-position 0.3s;
+
+    &:hover {
+      -webkit-mask-position: left top;
+      mask-position: left top;
+    }
+  }
+`;

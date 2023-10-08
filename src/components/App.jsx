@@ -7,6 +7,7 @@ const Register = lazy(() => import('pages/register/RegistrationPage'));
 const Login = lazy(() => import('pages/LoginPage/LoginPage'));
 const Statistic = lazy(() => import('pages/statistic/PH_statistic'));
 const Currency = lazy(() => import('pages/currency/PH_currency'));
+const Test = lazy(() => import('pages/login/PH_login'));
 
 const isAuth = true;
 
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/test" element={<Test />} />
 
         {isAuth ? (
           <Route>
