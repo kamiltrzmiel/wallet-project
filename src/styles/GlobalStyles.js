@@ -6,6 +6,15 @@ import BottomLeftBigIcon from '../assets/icons/login/Ellipse1.svg';
 import TopRightBigIcon from '../assets/icons/login/Ellipse2.svg';
 export const GlobalStyles = createGlobalStyle`
 
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  h4 {
+    margin: 0;
+  }
+  
   nav {
     .active{
         ${Icon} {
