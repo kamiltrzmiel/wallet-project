@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchTransactions } from 'redux/slices/financeSlice';
-import { Title } from './Dashboard.styled';
+import { Title } from './DashboardPage.styled';
 import Transactions from 'components/Transactions/Transactions';
 import TransactionsMobile from 'components/TransactionsMobile/TransactionsMobile';
 import ButtonAddTransaction from 'components/ButtonAddTransaction/ButtonAddTransaction';
