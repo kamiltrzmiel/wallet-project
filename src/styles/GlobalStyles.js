@@ -2,8 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 import { Icon } from 'components/Icon/Icon';
 import TopRightIcon from '../assets/icons/login/Ellipse1.svg';
 import BottomLeftIcon from '../assets/icons/login/Ellipse2.svg';
-import BottomLeftBigIcon from '../assets/icons/login/Ellipse1.svg';
-import TopRightBigIcon from '../assets/icons/login/Ellipse2.svg';
+import BottomLeftBigIcon from '../assets/icons/login/Ellipse2.svg';
+import TopRightBigIcon from '../assets/icons/login/Ellipse1.svg';
 export const GlobalStyles = createGlobalStyle`
 
   ul {
