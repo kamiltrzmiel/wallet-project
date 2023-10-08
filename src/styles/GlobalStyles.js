@@ -1,9 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 import { Icon } from 'components/Icon/Icon';
-import TopRightIcon from '../assets/icons/blob-2.svg';
-import BottomLeftIcon from '../assets/icons/blob-1.svg';
-import BottomLeftBigIcon from '../assets/icons/blob-3.svg';
-import TopRightBigIcon from '../assets/icons/blob-4.svg';
+import TopRightIcon from '../assets/icons/login/Ellipse1.svg';
+import BottomLeftIcon from '../assets/icons/login/Ellipse2.svg';
+import BottomLeftBigIcon from '../assets/icons/login/Ellipse1.svg';
+import TopRightBigIcon from '../assets/icons/login/Ellipse2.svg';
 export const GlobalStyles = createGlobalStyle`
 
   nav {
