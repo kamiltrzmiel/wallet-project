@@ -14,13 +14,18 @@ export const ModalContainer = styled.div`
   transition: opacity 0.3s ease;
 `;
 export const ModalWindow = styled.div`
-  padding: 32px;
+  padding: 18px;
   padding-bottom: 90px;
   border-radius: 20px;
   background-color: #fff;
   position: relative;
   max-width: 280px;
   animation: slideIn 0.3s ease;
+  text-align: center;
+
+  @media (min-width: 1280px) {
+    min-width: 330px;
+  }
 
   @keyframes slideIn {
     from {
@@ -45,9 +50,13 @@ export const NoBtn = styled.button`
   color: #fff;
   width: 80px;
   position: absolute;
-  right: 60px;
+  right: 18%;
   margin-top: 5px;
   cursor: pointer;
+
+  @media (min-width: 1280px) {
+    right: 20%;
+  }
 `;
 
 export const YesBtn = styled.button`
@@ -62,7 +71,11 @@ export const YesBtn = styled.button`
   color: #4a56e2;
   width: 80px;
   position: absolute;
-  left: 60px;
+  left: 18%;
   margin-top: 5px;
   cursor: pointer;
+
+  @media (min-width: 1280px) {
+    left: 20%;
+  }
 `;

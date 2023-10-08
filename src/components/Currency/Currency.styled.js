@@ -12,6 +12,7 @@ export const StyledTable = styled.table`
   color: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   position: relative;
+  font-family: Circe;
 
   &::before,
   &::after {
