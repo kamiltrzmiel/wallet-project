@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { setIsModalLogoutOpen } from 'redux/slices/globalSlice';
 import { logout } from 'redux/slices/sessionSlice';
 
-export const ModalLogout = () => {
+const ModalLogout = () => {
   const bodyEl = document.querySelector('body');
   bodyEl.style.overflow = 'hidden';
 
@@ -56,3 +56,5 @@ export const ModalLogout = () => {
     </ModalContainer>
   );
 };
+
+export default ModalLogout;

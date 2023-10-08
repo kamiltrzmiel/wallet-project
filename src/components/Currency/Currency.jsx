@@ -16,7 +16,7 @@ import {
   ErrorMsg,
 } from './Currency.styled';
 
-export const Currency = () => {
+const Currency = () => {
   const dispatch = useDispatch();
   const rates = useSelector(selectCurrency);
   const isLoading = useSelector(selectIsLoading);
@@ -64,3 +64,5 @@ export const Currency = () => {
     </>
   );
 };
+
+export default Currency;
