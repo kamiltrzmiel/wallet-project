@@ -24,7 +24,7 @@ const Navigation = () => {
         </NavItem>
 
         <NavItem>
-          <StyledNavLink to={`/currency`}>Placeholder: Currency</StyledNavLink>
+          <StyledNavLink to={`/currency`} />
         </NavItem>
       </NavList>
     </NavContainer>

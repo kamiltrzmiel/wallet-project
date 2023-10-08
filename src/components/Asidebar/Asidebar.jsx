@@ -32,7 +32,7 @@ const AsideMenu = () => {
         <Navigation />
         {windowWidth || isHome ? <Balance /> : null}
       </FlexWrapper>
-      {isCurrency ? null : <Currency />}
+      {window.innerWidth <= 767 || isCurrency ? null : <Currency />}
     </AsideContainer>
   );
 };
