@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = lazy(() => import('pages/dashboard/DashboardPage'));
 const Register = lazy(() => import('pages/register/RegistrationPage'));
@@ -30,6 +32,7 @@ const App = () => {
 
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
+      <ToastContainer />
     </Suspense>
   );
 };
