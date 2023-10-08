@@ -33,4 +33,14 @@ export const BaseInput = styled.input`
   + svg {
     width: 24px;
     height: 24px;
-    `;
+    position: absolute;
+    left: 10px;
+    top: -1px;
+    fill: var(--color-switch-main);
+    transition: fill 150ms;
+  }
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    width: 409.5px;
+  }
+`;
