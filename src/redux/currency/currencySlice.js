@@ -30,4 +30,4 @@ const currencySlice = createSlice({
 });
 
 export const { reset: resetCurrency } = currencySlice.actions;
-export const currencyReducer = currencySlice.reducer;
+export default currencySlice.reducer;
