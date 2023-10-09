@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import icons from '../../assets/icons/login/icons.svg';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from 'redux/slices/sessionSlice';
 
 import {
   FormikForm,
@@ -28,6 +31,16 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isAuth = useSelector(state => state.session.isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/home');
+    }
+  }, [isAuth, navigate]);
+
   const initialValues = {
     email: '',
     password: '',
@@ -52,10 +65,8 @@ const LoginForm = () => {
     };
   }, []);
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    // logika obsługi logowania
-    console.log('Dane logowania:', values);
-    setSubmitting(false);
+  const handleSubmit = values => {
+    dispatch(login({ email: values.email, password: values.password }));
   };
 
   return (

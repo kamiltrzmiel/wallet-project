@@ -96,11 +96,11 @@ export const Register = styled.button`
   color: #fff;
   text-transform: uppercase;
   font-family: circle;
-  padding: 13px 81px;
+  padding: 13px 97px;
   border: none;
   @media (min-width: 768px) {
     max-width: 300px;
-    padding: 14.5px 91px;
+    padding: 14.5px 107px;
   }
 `;
 

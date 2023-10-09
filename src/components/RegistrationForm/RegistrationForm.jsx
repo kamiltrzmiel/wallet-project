@@ -15,6 +15,9 @@ import {
   StyledFinance,
   Container,
 } from './RegistrationForm.styled';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from 'redux/slices/sessionSlice';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -41,9 +44,24 @@ const initialValues = {
 };
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isAuth = useSelector(state => state.session.isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/home');
+    }
+  }, [isAuth, navigate]);
+
   const handleSubmit = values => {
-    //  logika obsługi formularza. wysłanie danych na serwer
-    console.log('Dane formularza:', values);
+    dispatch(
+      register({
+        name: values.firstName,
+        email: values.email,
+        password: values.password,
+      })
+    );
   };
 
   const [showFinance, setShowFinance] = useState(false);
@@ -134,7 +152,7 @@ const RegistrationForm = () => {
                 />
                 <ErrorMsg name="firstName" component="div" />
               </FormGroup>
-              <Register type="submit">Zarejestruj</Register>
+              <Register type="submit">Register</Register>
               <StyledLink to="/login">Log In</StyledLink>
             </Wrapper>
           </Container>
