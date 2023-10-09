@@ -1,6 +1,9 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setIsModalAddTransactionOpen } from 'redux/slices/globalSlice';
 import { StyledButton } from './ButtonAddTransaction.styled';
+import { Icon } from 'components/Icon/Icon';
+import { motion } from 'framer-motion';
 
 const ButtonAddTransaction = () => {
   const dispatch = useDispatch();
@@ -12,7 +15,27 @@ const ButtonAddTransaction = () => {
     }
   };
 
-  return <StyledButton onClick={handleOpenModal}>Add_Btn</StyledButton>;
+  const btnVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        duration: 0.3,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  return (
+    <motion.div variants={btnVariants} initial="hidden" animate="visible">
+      <StyledButton onClick={handleOpenModal}>
+        <Icon icon="icon__btn-plus" />
+      </StyledButton>
+    </motion.div>
+  );
 };
 
 export default ButtonAddTransaction;

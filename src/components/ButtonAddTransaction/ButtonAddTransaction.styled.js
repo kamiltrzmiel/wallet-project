@@ -37,5 +37,6 @@ export const StyledButton = styled.button`
   @media (min-width: 1280px) {
     position: absolute;
     bottom: -40px;
+    right: 40px;
   }
 `;
