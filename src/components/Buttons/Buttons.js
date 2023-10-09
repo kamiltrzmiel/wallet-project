@@ -77,6 +77,7 @@ export const DeleteButton = styled(PrimaryButton)`
   padding: 0;
   min-height: 26px;
   margin-bottom: 0px;
+  cursor: pointer;
 
   &:not(:last-of-type) {
     margin-bottom: 0px;

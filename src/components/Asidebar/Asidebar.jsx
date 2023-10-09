@@ -3,7 +3,7 @@ import Currency from 'components/Currency/Currency';
 import Navigation from 'components/Navigation/Navigation';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { FlexWrapper, AsideContainer } from './AsideBar.styled';
+import { FlexWrapper, AsideContainer } from './Asidebar.styled';
 
 const CURRENCY_PATH = '/currency';
 const HOME_PATH = '/home';
@@ -32,7 +32,7 @@ const AsideMenu = () => {
         <Navigation />
         {windowWidth || isHome ? <Balance /> : null}
       </FlexWrapper>
-      {isCurrency ? null : <Currency />}
+      {window.innerWidth <= 767 || isCurrency ? null : <Currency />}
     </AsideContainer>
   );
 };

@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
   ul {
     margin: 0;
     padding: 0;
+    list-style-type: none;
   }
 
   h4 {
@@ -38,6 +39,11 @@ export const GlobalStyles = createGlobalStyle`
     background-color: var(--background-light);
     font-family: Circe;
   }
+
+  main {
+    margin: 0 auto;
+  }
+  
   body {
   z-index: -1;
   position: relative;
@@ -45,9 +51,11 @@ export const GlobalStyles = createGlobalStyle`
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--background-accent);
+  // background: var(--background-accent);
+  /* background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(25px); */
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+  /* @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -82,7 +90,7 @@ export const GlobalStyles = createGlobalStyle`
       right: 0px;
     }
   }
-  }
+  } */
 
 }
 

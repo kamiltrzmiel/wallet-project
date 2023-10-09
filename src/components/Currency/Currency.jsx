@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   selectCurrency,
   selectIsLoading,
@@ -25,6 +26,24 @@ const Currency = () => {
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const locationCurrency = location.pathname === '/currency';
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 767 && locationCurrency) {
+        navigate('/home');
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [navigate, locationCurrency]);
 
   return (
     <>

@@ -53,6 +53,11 @@ export const NoBtn = styled.button`
   right: 18%;
   margin-top: 5px;
   cursor: pointer;
+  transition: background-color 350ms ease;
+
+  &:hover {
+    background-color: var(--color-brand-primary);
+  }
 
   @media (min-width: 1280px) {
     right: 20%;
@@ -74,6 +79,12 @@ export const YesBtn = styled.button`
   left: 18%;
   margin-top: 5px;
   cursor: pointer;
+  transition: background-color 350ms ease, color 350ms ease;
+
+  &:hover {
+    background-color: #4a56e2;
+    color: #fff;
+  }
 
   @media (min-width: 1280px) {
     left: 20%;
