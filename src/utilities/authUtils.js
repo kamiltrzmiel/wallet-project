@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { resetSession } from 'redux/slices/sessionSlice';
 
-export const API_URL = '';
+export const API_URL = 'https://virtserver.swaggerhub.com/wallet/';
 
 const WalletInstance = axios.create();
 export { WalletInstance };
@@ -16,9 +16,7 @@ export const setDispatch = dispatch => {
 export const setAuthToken = () => {
   const accessToken = Cookies.get('accessToken');
   if (accessToken) {
-    WalletInstance.defaults.headers.common[
-      'Authorization'
-    ] = `Bearer ${accessToken}`;
+    WalletInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   } else {
     delete WalletInstance.defaults.headers.common['Authorization'];
   }
@@ -72,11 +70,7 @@ WalletInstance.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
 
-    if (
-      error.response &&
-      error.response.status === 401 &&
-      !originalRequest._retry
-    ) {
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
@@ -84,9 +78,7 @@ WalletInstance.interceptors.response.use(
         if (!accessToken) {
           return;
         }
-        WalletInstance.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${accessToken}`;
+        WalletInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
 
         return WalletInstance(originalRequest);
