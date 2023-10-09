@@ -10,7 +10,7 @@ const Statistic = lazy(() => import('pages/statistic/StatisticPage'));
 const Currency = lazy(() => import('pages/currency/CurrencyPage'));
 const Layout = lazy(() => import('../layout/layout'));
 
-const isAuth = true;
+const isAuth = false;
 
 const App = () => {
   return (
