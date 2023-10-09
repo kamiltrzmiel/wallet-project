@@ -2,7 +2,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setIsModalEditTransactionOpen } from 'redux/slices/globalSlice';
 import { removeTransaction } from 'redux/slices/financeSlice';
 import { makeProperDate, formatDate } from 'utilities/formatUtils';
-import { MainList, SecondList, StyledLi } from './TransactionsMobile.styled';
+import {
+  MainList,
+  SecondList,
+  StyledLi,
+  SumSpan,
+  EditBtn,
+} from './TransactionsMobile.styled';
+import { DeleteButton } from 'components/Buttons/Buttons';
+import editIcon from '../../assets/icons/editIcon.svg';
 
 const TransactionsMobile = () => {
   const { transactions } = useSelector(state => state.finance);
@@ -50,15 +58,25 @@ const TransactionsMobile = () => {
               </StyledLi>
               <StyledLi>
                 <h4>Sum</h4>
-                <span>{amount}</span>
+                <SumSpan
+                  style={isIncome ? { color: '#24CCA7' } : { color: '#FF6596' }}
+                >
+                  {amount}
+                </SumSpan>
               </StyledLi>
               <StyledLi>
-                <button type="button" onClick={deleteHandler}>
+                <DeleteButton type="button" onClick={deleteHandler}>
                   Delete
-                </button>
-                <button type="button" onClick={handleOpenEditModal}>
+                </DeleteButton>
+                <EditBtn type="button" onClick={handleOpenEditModal}>
+                  <img
+                    src={editIcon}
+                    alt="edit icon"
+                    width="14px"
+                    height="14px"
+                  />
                   Edit
-                </button>
+                </EditBtn>
               </StyledLi>
             </SecondList>
           </li>
