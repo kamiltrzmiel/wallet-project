@@ -65,7 +65,7 @@ const TransactionsMobile = () => {
                 </SumSpan>
               </StyledLi>
               <StyledLi>
-                <DeleteButton type="button" onClick={deleteHandler}>
+                <DeleteButton type="button" onClick={() => deleteHandler(_id)}>
                   Delete
                 </DeleteButton>
                 <EditBtn type="button" onClick={handleOpenEditModal}>

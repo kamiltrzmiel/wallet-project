@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
   ul {
     margin: 0;
     padding: 0;
+    list-style-type: none;
   }
 
   h4 {
@@ -38,6 +39,11 @@ export const GlobalStyles = createGlobalStyle`
     background-color: var(--background-light);
     font-family: Circe;
   }
+
+  main {
+    margin: 0 auto;
+  }
+  
   body {
   z-index: -1;
   position: relative;
