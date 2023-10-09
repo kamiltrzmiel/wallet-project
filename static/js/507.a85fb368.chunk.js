@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwallet_project=self.webpackChunkwallet_project||[]).push([[507],{4507:function(e,c,t){t(2791);c.Z=t.p+"static/media/icons.8a67b9307dbbb44135f549d00598ecb5.svg"}}]);
+//# sourceMappingURL=507.a85fb368.chunk.js.map
