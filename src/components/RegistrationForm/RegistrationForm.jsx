@@ -141,7 +141,7 @@ const RegistrationForm = () => {
               </FormGroup>
 
               <FormGroup>
-                <StyledIcon width="17" height="21">
+                <StyledIcon width="18" height="18">
                   <use xlinkHref={`${icons}#firstname`} />
                 </StyledIcon>
                 <FormikField

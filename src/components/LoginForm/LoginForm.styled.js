@@ -50,15 +50,11 @@ export const FormikField = styled(Field)`
   font-style: normal;
   font-weight: 400;
   line-height: 1.33;
-  width: 225.5px;
   padding: 3.54px 0px 3.54px 54.5px;
   background-color: #fff;
   &:focus {
     outline: none;
     background-color: transparent;
-  }
-  @media (min-width: 768px) {
-    min-width: 355px;
   }
 `;
 
@@ -72,6 +68,11 @@ export const FormGroup = styled.div`
   @media (min-width: 768px) {
     min-width: 409.5px;
   }
+  &:focus-within {
+    svg {
+      fill: #4a55e2;
+    }
+  }
 `;
 
 export const StyledIcon = styled.svg`
@@ -79,6 +80,8 @@ export const StyledIcon = styled.svg`
   top: 50%;
   transform: translateY(-50%);
   left: 12.5px;
+  fill: #e0e0e0;
+  transition: fill 0.3s ease-in;
 `;
 export const ErrorMsg = styled(ErrorMessage)`
   color: red;
@@ -98,9 +101,14 @@ export const LogIn = styled.button`
   font-family: circle;
   padding: 13px 108.76px;
   border: none;
+  cursor: pointer;
+  transition: opacity, 0.3s ease, color 0.3s ease;
+  &:hover {
+    opacity: 0.8;
+  }
   @media (min-width: 768px) {
     max-width: 300px;
-    padding: 14.5px 119.76px;
+    padding: 14.5px 119.75px;
   }
 `;
 
@@ -117,6 +125,13 @@ export const StyledLink = styled(NavLink)`
   text-decoration: none;
   padding: 13px 96px;
   margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  &:hover {
+    opacity: 0.8;
+    background-color: #4a56e2;
+    color: #fff;
+  }
   @media (min-width: 768px) {
     max-width: 300px;
     padding: 13.7px 106px;
