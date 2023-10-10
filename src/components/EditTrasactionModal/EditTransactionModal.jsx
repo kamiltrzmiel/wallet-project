@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { Formik } from 'formik';
 import { object, string, date, bool, mixed, number } from 'yup';
 
-import Switch from 'components/Switch/Switch';
 import CategorySelect from 'components/CategorySelect/CategorySelect';
 import { BaseInput } from 'components/Inputs/BaseInput.styled';
 import DatetimePicker from 'components/DatetimePicker/DatetimePicker';
 import Textarea from 'components/Inputs/Textarea';
 import { PrimaryButton } from 'components/Buttons/Buttons';
 import { Icon } from 'components/Icon/Icon';
+import { customStyles } from 'components/CategorySelect/CategorySelect.styled';
 
-import { addTransaction, fetchTransactions } from 'redux/slices/financeSlice';
-import { setIsModalAddTransactionOpen } from 'redux/slices/globalSlice';
+import { editTransaction, fetchTransactions } from 'redux/slices/financeSlice';
+import { setIsModalEditTransactionOpen } from 'redux/slices/globalSlice';
 import { formatDate } from 'utilities/formatUtils';
 import { dateTransformer } from 'utilities/formatUtils';
 
@@ -22,12 +22,16 @@ import {
   CancelButton,
   CloseButton,
   ErrorText,
+  ExpenseSpan,
   FormikForm,
   Heading,
+  IncomeSpan,
   InputWrapper,
   Modal,
+  TransactionTypeDiv,
   TwoColumnRow,
-} from './AddTransactionModal.styled';
+  placeholderStyles,
+} from './EditTransactionModal.styled';
 
 const options = [
   { value: 'main expenses', label: 'Main expenses' },
@@ -42,28 +46,27 @@ const options = [
   { value: 'entertainment', label: 'Entertainment' },
 ];
 
-const AddTransactionModal = () => {
-  const [isChecked, setIsChecked] = useState(false);
+const EditTransactionModal = () => {
   const dispatch = useDispatch();
 
-  const handleCheckboxChange = () => {
-    setIsChecked(isChecked => !isChecked);
-  };
+  const selectedTransactionToEdit = useSelector(
+    state => state => state.finance.currentTransactionToEdit
+  );
 
-  const handleCloseModal = () => {
-    dispatch(setIsModalAddTransactionOpen(false));
+  const handleCloseEditModal = () => {
+    dispatch(setIsModalEditTransactionOpen(false));
     document.body.style.overflow = 'unset';
   };
 
   const handleBackdropClick = ev => {
     if (ev.currentTarget === ev.target) {
-      handleCloseModal();
+      handleCloseEditModal();
     }
   };
 
   const escKeyDown = ev => {
     if (ev.code === 'Escape') {
-      handleCloseModal();
+      handleCloseEditModal();
     }
   };
 
@@ -76,32 +79,34 @@ const AddTransactionModal = () => {
 
   const handleSubmit = values => {
     dispatch(
-      addTransaction({
-        amount: values.value,
-        comment: values.comment,
-        date: values.date,
-        category: isChecked ? 'income' : values.category.label,
-        isIncome: isChecked,
+      editTransaction({
+        id: selectedTransactionToEdit._id,
+        updatedData: {
+          amount: values.value,
+          comment: values.comment,
+          date: values.date,
+          category: values.category.label,
+          isIncome: selectedTransactionToEdit.isIncome,
+        },
       })
     ).then(() => dispatch(fetchTransactions()));
-
-    dispatch(setIsModalAddTransactionOpen(false));
+    dispatch(setIsModalEditTransactionOpen(false));
     document.body.style.overflow = 'unset';
   };
 
   return (
-    <Backdrop onClose={handleCloseModal} onClick={handleBackdropClick}>
+    <Backdrop onClose={handleCloseEditModal} onClick={handleBackdropClick}>
       <Modal>
-        <CloseButton onClick={handleCloseModal}>
+        <CloseButton onClick={handleCloseEditModal}>
           <Icon icon="icon__close" />
         </CloseButton>
         <Formik
           initialValues={{
-            type: isChecked,
-            category: null,
-            value: '',
-            date: `${formatDate(new Date())}`,
-            comment: '',
+            type: selectedTransactionToEdit.isIncome,
+            category: selectedTransactionToEdit.category,
+            value: selectedTransactionToEdit.amount,
+            date: `${formatDate(selectedTransactionToEdit.date)}`,
+            comment: selectedTransactionToEdit.comment,
           }}
           validationSchema={object({
             type: bool(),
@@ -134,21 +139,25 @@ const AddTransactionModal = () => {
         >
           {({ values, setFieldValue, handleBlur }) => (
             <FormikForm>
-              <Heading>Add transaction</Heading>
-              <Switch
-                name="type"
-                checked={isChecked}
-                onClick={handleCheckboxChange}
-                type="checkbox"
-              />
-              {!isChecked && (
+              <Heading>Edit transaction</Heading>
+              <TransactionTypeDiv>
+                <IncomeSpan $active={selectedTransactionToEdit.isIncome}>
+                  Income
+                </IncomeSpan>
+                <Icon icon="icon__slash"></Icon>
+                <ExpenseSpan $active={!selectedTransactionToEdit.isIncome}>
+                  Expense
+                </ExpenseSpan>
+              </TransactionTypeDiv>
+              {!selectedTransactionToEdit.isIncome && (
                 <InputWrapper>
                   <CategorySelect
-                    name="category"
-                    placeholder="Select a category"
                     value={values.category}
+                    placeholder={selectedTransactionToEdit.category}
+                    name="category"
                     onChange={category => setFieldValue('category', category)}
                     options={options}
+                    styles={{ ...customStyles, ...placeholderStyles }}
                   />
                   <ErrorText
                     name="category"
@@ -157,7 +166,6 @@ const AddTransactionModal = () => {
                   />
                 </InputWrapper>
               )}
-
               <TwoColumnRow>
                 <InputWrapper>
                   <BaseInput
@@ -173,7 +181,6 @@ const AddTransactionModal = () => {
                     onBlur={handleBlur}
                     onKeyUp={handleBlur}
                   />
-                  <ErrorText name="value" component="div" className="error" />
                 </InputWrapper>
                 <CalendarWrapper>
                   <DatetimePicker
@@ -182,6 +189,8 @@ const AddTransactionModal = () => {
                     type="date"
                     timeFormat={false}
                   />
+                  <ErrorText name="date" component="div" />
+                  <Icon icon="icon__baseline-date_range" />
                 </CalendarWrapper>
               </TwoColumnRow>
               <InputWrapper>
@@ -194,8 +203,8 @@ const AddTransactionModal = () => {
                 />
                 <ErrorText name="comment" component="div" />
               </InputWrapper>
-              <PrimaryButton type="submit">ADD</PrimaryButton>
-              <CancelButton type="button" onClick={handleCloseModal}>
+              <PrimaryButton type="submit">SAVE</PrimaryButton>
+              <CancelButton onClick={handleCloseEditModal} type="button">
                 CANCEL
               </CancelButton>
             </FormikForm>
@@ -206,4 +215,4 @@ const AddTransactionModal = () => {
   );
 };
 
-export default AddTransactionModal;
+export default EditTransactionModal;
