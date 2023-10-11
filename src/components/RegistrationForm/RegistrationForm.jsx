@@ -18,6 +18,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from 'redux/slices/sessionSlice';
+import PasswordStrength from 'components/Inputs/PasswordStrength';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -83,6 +84,8 @@ const RegistrationForm = () => {
     };
   }, []);
 
+  const [password, setPassword] = useState('');
+
   return (
     <div>
       <Formik
@@ -118,12 +121,18 @@ const RegistrationForm = () => {
                 <StyledIcon width="17" height="21">
                   <use xlinkHref={`${icons}#password`} />
                 </StyledIcon>
+
                 <FormikField
                   type="password"
                   id="password"
                   name="password"
                   placeholder="Password"
+                  onInput={e => {
+                    setPassword(e.target.value);
+                  }}
                 />
+                <PasswordStrength value={password} />
+
                 <ErrorMsg name="password" component="div" />
               </FormGroup>
 
