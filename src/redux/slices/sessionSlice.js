@@ -97,23 +97,23 @@ export const fetchUserProfile = createAsyncThunk(
   }
 );
 
-export const refreshAccessToken = createAsyncThunk(
-  'session/refreshAccessToken',
-  async (_, { dispatch }) => {
-    dispatch(setIsLoading(true));
-    try {
-      const response = await refreshTokens();
-      return response;
-    } catch (error) {
-      toast.error(
-        'An unexpected error occurred while refreshing access token.'
-      );
-      throw error;
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-  }
-);
+// export const refreshAccessToken = createAsyncThunk(
+//   'session/refreshAccessToken',
+//   async (_, { dispatch }) => {
+//     dispatch(setIsLoading(true));
+//     try {
+//       const response = await refreshTokens();
+//       return response;
+//     } catch (error) {
+//       toast.error(
+//         'An unexpected error occurred while refreshing access token.'
+//       );
+//       throw error;
+//     } finally {
+//       dispatch(setIsLoading(false));
+//     }
+//   }
+// );
 
 const initialState = {
   user: {},
@@ -194,21 +194,21 @@ export const sessionSlice = createSlice({
       state.error = action.error.message;
     });
 
-    builder.addCase(refreshAccessToken.pending, state => {
-      state.isLoading = true;
-    });
+    // builder.addCase(refreshAccessToken.pending, state => {
+    //   state.isLoading = true;
+    // });
 
-    builder.addCase(refreshAccessToken.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = 'New Auth Token Granted';
-      state.error = null;
-    });
+    // builder.addCase(refreshAccessToken.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = 'New Auth Token Granted';
+    //   state.error = null;
+    // });
 
-    builder.addCase(refreshAccessToken.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = 'Could not verify user, you have been logged out';
-      state.isAuth = false;
-    });
+    // builder.addCase(refreshAccessToken.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = 'Could not verify user, you have been logged out';
+    //   // state.isAuth = false;
+    // });
   },
 });
 
