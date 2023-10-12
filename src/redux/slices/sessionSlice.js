@@ -7,7 +7,7 @@ import {
   logoutUser,
   getUserProfile,
 } from '../../utilities/api';
-import { refreshTokens, setAuthToken } from 'utilities/authUtils';
+import { setAuthToken } from 'utilities/authUtils';
 import { resetGlobal, setIsLoading, setIsModalLogoutOpen } from './globalSlice';
 import { resetTransactions } from './financeSlice';
 import { resetCurrency } from 'redux/currency/currencySlice';
@@ -39,6 +39,7 @@ export const login = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
       const response = await loginUser(loginData);
+
       return response;
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
@@ -97,23 +98,23 @@ export const fetchUserProfile = createAsyncThunk(
   }
 );
 
-export const refreshAccessToken = createAsyncThunk(
-  'session/refreshAccessToken',
-  async (_, { dispatch }) => {
-    dispatch(setIsLoading(true));
-    try {
-      const response = await refreshTokens();
-      return response;
-    } catch (error) {
-      toast.error(
-        'An unexpected error occurred while refreshing access token.'
-      );
-      throw error;
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-  }
-);
+// export const refreshAccessToken = createAsyncThunk(
+//   'session/refreshAccessToken',
+//   async (_, { dispatch }) => {
+//     dispatch(setIsLoading(true));
+//     try {
+//       const response = await refreshTokens();
+//       return response;
+//     } catch (error) {
+//       toast.error(
+//         'An unexpected error occurred while refreshing access token.'
+//       );
+//       throw error;
+//     } finally {
+//       dispatch(setIsLoading(false));
+//     }
+//   }
+// );
 
 const initialState = {
   user: {},
@@ -159,12 +160,12 @@ export const sessionSlice = createSlice({
     });
 
     builder.addCase(login.fulfilled, (state, action) => {
-      const { accessToken, user } = action.payload;
+      const { token, name, email } = action.payload;
 
-      setAuthToken(accessToken);
+      setAuthToken(token);
 
       state.isLoading = false;
-      state.user = user;
+      state.user = { name, email };
       state.isAuth = true;
       state.error = null;
     });
@@ -194,21 +195,21 @@ export const sessionSlice = createSlice({
       state.error = action.error.message;
     });
 
-    builder.addCase(refreshAccessToken.pending, state => {
-      state.isLoading = true;
-    });
+    // builder.addCase(refreshAccessToken.pending, state => {
+    //   state.isLoading = true;
+    // });
 
-    builder.addCase(refreshAccessToken.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = 'New Auth Token Granted';
-      state.error = null;
-    });
+    // builder.addCase(refreshAccessToken.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = 'New Auth Token Granted';
+    //   state.error = null;
+    // });
 
-    builder.addCase(refreshAccessToken.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = 'Could not verify user, you have been logged out';
-      state.isAuth = false;
-    });
+    // builder.addCase(refreshAccessToken.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = 'Could not verify user, you have been logged out';
+    //   state.isAuth = false;
+    // });
   },
 });
 
