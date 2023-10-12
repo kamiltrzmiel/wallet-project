@@ -14,11 +14,11 @@ export const setDispatch = dispatch => {
 };
 
 export const setAuthToken = () => {
-  const accessToken = Cookies.get('accessToken');
-  if (accessToken) {
-    WalletInstance.defaults.headers.common[
-      'Authorization'
-    ] = `Bearer ${accessToken}`;
+
+  const token = Cookies.get('token');
+  if (token) {
+    WalletInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
   } else {
     delete WalletInstance.defaults.headers.common['Authorization'];
   }
@@ -72,11 +72,9 @@ export const cookieOptions = {
 //   async error => {
 //     const originalRequest = error.config;
 
-//     if (
-//       error.response &&
-//       error.response.status === 401 &&
-//       !originalRequest._retry
-//     ) {
+
+//     if (error.response && error.response.status === 401 && !originalRequest._retry) {
+
 //       originalRequest._retry = true;
 
 //       try {
@@ -84,9 +82,8 @@ export const cookieOptions = {
 //         if (!accessToken) {
 //           return;
 //         }
-//         WalletInstance.defaults.headers.common[
-//           'Authorization'
-//         ] = `Bearer ${accessToken}`;
+
+//         WalletInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 //         originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
 
 //         return WalletInstance(originalRequest);

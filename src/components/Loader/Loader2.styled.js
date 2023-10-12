@@ -1,6 +1,4 @@
-// Waiting for icon style
-
-// import { Icon } from 'components/Icon/Icon';
+import { Icon } from 'components/Icon/Icon';
 
 import styled from 'styled-components';
 
@@ -13,7 +11,7 @@ export const LoaderBox = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-/* export const IconLoader = styled(Icon)`
+export const IconLoader = styled(Icon)`
   margin-right: 10px;
   width: 40px;
   height: 40px;
@@ -22,7 +20,6 @@ export const LoaderBox = styled.div`
     height: 48px;
   }
 `;
-*/
 
 export const Loader = styled.span`
   font-size: 40px;

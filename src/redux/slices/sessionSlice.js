@@ -7,7 +7,9 @@ import {
   logoutUser,
   getUserProfile,
 } from '../../utilities/api';
+
 // import { refreshTokens, setAuthToken } from 'utilities/authUtils';
+
 import { setAuthToken } from 'utilities/authUtils';
 import { resetGlobal, setIsLoading, setIsModalLogoutOpen } from './globalSlice';
 import { resetTransactions } from './financeSlice';
@@ -20,7 +22,8 @@ export const register = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
       const response = await registerUser(userData);
-      return { token: response.token, user: response.user };
+
+      return response;
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         toast.error(error.response.data.error);
@@ -41,6 +44,7 @@ export const login = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
       const response = await loginUser(loginData);
+
       return response;
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
@@ -140,12 +144,10 @@ export const sessionSlice = createSlice({
     });
 
     builder.addCase(register.fulfilled, (state, action) => {
-      const { accessToken, user } = action.payload;
-
-      setAuthToken(accessToken);
+      const { email, name } = action.payload;
 
       state.isLoading = false;
-      state.user = user;
+      state.user = { email, name };
       state.isAuth = true;
       state.error = null;
     });
@@ -161,12 +163,12 @@ export const sessionSlice = createSlice({
     });
 
     builder.addCase(login.fulfilled, (state, action) => {
-      const { accessToken, user } = action.payload;
+      const { token, name, email } = action.payload;
 
-      setAuthToken(accessToken);
+      setAuthToken(token);
 
       state.isLoading = false;
-      state.user = user;
+      state.user = { name, email };
       state.isAuth = true;
       state.error = null;
     });
@@ -209,7 +211,8 @@ export const sessionSlice = createSlice({
     // builder.addCase(refreshAccessToken.rejected, (state, action) => {
     //   state.isLoading = false;
     //   state.error = 'Could not verify user, you have been logged out';
-    //   // state.isAuth = false;
+    //   state.isAuth = false;
+
     // });
   },
 });
