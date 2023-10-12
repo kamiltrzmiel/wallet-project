@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { WalletInstance } from './authUtils';
 
 import { cookieOptions } from './authUtils';
-export const API_URL = 'https://modern-gold-fatigues.cyclic.app/api/';
+export const API_URL = 'https://modern-gold-fatigues.cyclic.app/api';
 setAuthToken();
 
 export const registerUser = async userData => {
