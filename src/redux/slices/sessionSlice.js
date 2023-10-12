@@ -19,7 +19,8 @@ export const register = createAsyncThunk(
     try {
       dispatch(setIsLoading(true));
       const response = await registerUser(userData);
-      return { token: response.token, user: response.user };
+
+      return response;
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         toast.error(error.response.data.error);
@@ -139,12 +140,10 @@ export const sessionSlice = createSlice({
     });
 
     builder.addCase(register.fulfilled, (state, action) => {
-      const { accessToken, user } = action.payload;
-
-      setAuthToken(accessToken);
+      const { email, name } = action.payload;
 
       state.isLoading = false;
-      state.user = user;
+      state.user = { email, name };
       state.isAuth = true;
       state.error = null;
     });
