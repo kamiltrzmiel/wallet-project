@@ -28,7 +28,7 @@ export const fetchTransactions = createAsyncThunk(
   async (_, { dispatch }) => {
     dispatch(setIsLoading(true));
     try {
-      const response = await getTransactions();
+      const { response } = await getTransactions();
       const filtered = response.map(filterTransaction);
       return filtered;
     } catch (error) {
