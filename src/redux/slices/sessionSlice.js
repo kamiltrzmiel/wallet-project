@@ -7,7 +7,8 @@ import {
   logoutUser,
   getUserProfile,
 } from '../../utilities/api';
-import { refreshTokens, setAuthToken } from 'utilities/authUtils';
+// import { refreshTokens, setAuthToken } from 'utilities/authUtils';
+import { setAuthToken } from 'utilities/authUtils';
 import { resetGlobal, setIsLoading, setIsModalLogoutOpen } from './globalSlice';
 import { resetTransactions } from './financeSlice';
 import { resetCurrency } from 'redux/currency/currencySlice';
@@ -29,6 +30,7 @@ export const register = createAsyncThunk(
       throw error;
     } finally {
       dispatch(setIsLoading(false));
+      login();
     }
   }
 );

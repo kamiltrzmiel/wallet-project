@@ -1,16 +1,16 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { resetSession } from 'redux/slices/sessionSlice';
+// import { resetSession } from 'redux/slices/sessionSlice';
 
 export const API_URL = 'https://modern-gold-fatigues.cyclic.app/api';
 
 const WalletInstance = axios.create();
 export { WalletInstance };
 
-let dispatchFunction;
+// let dispatchFunction;
 
 export const setDispatch = dispatch => {
-  dispatchFunction = dispatch;
+  // dispatchFunction = dispatch;
 };
 
 export const setAuthToken = () => {
