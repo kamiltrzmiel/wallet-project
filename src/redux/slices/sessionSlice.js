@@ -208,6 +208,7 @@ export const sessionSlice = createSlice({
     //   state.isLoading = false;
     //   state.error = 'Could not verify user, you have been logged out';
     //   state.isAuth = false;
+
     // });
   },
 });
