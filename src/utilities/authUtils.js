@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { resetSession } from 'redux/slices/sessionSlice';
 
-export const API_URL = 'https://virtserver.swaggerhub.com/wallet/';
+export const API_URL = '';
 
 const WalletInstance = axios.create();
 export { WalletInstance };
