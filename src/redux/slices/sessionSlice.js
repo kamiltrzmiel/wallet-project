@@ -7,6 +7,9 @@ import {
   logoutUser,
   getUserProfile,
 } from '../../utilities/api';
+
+// import { refreshTokens, setAuthToken } from 'utilities/authUtils';
+
 import { setAuthToken } from 'utilities/authUtils';
 import { resetGlobal, setIsLoading, setIsModalLogoutOpen } from './globalSlice';
 import { resetTransactions } from './financeSlice';
@@ -30,6 +33,7 @@ export const register = createAsyncThunk(
       throw error;
     } finally {
       dispatch(setIsLoading(false));
+      login();
     }
   }
 );
