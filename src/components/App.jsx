@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from 'layout/layout';
 import WithAuthRedirect from 'routes/authRedirect';
+import TransactionsModalWrapper from './TransactionsModalWrapper/TransactionsModalWrapper';
 
 const Home = lazy(() => import('pages/dashboard/DashboardPage'));
 const Register = lazy(() => import('pages/register/RegistrationPage'));
@@ -14,22 +15,24 @@ const Currency = lazy(() => import('pages/currency/CurrencyPage'));
 
 const App = () => {
   return (
-    <Suspense>
-      <Routes>
-        
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+    <>
+      <TransactionsModalWrapper />
+      <Suspense>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-        <Route element={<WithAuthRedirect children={<Layout />} />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/diagram" element={<Statistic />} />
-          <Route path="/currency" element={<Currency />} />
-        </Route>
+          <Route element={<WithAuthRedirect children={<Layout />} />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/diagram" element={<Statistic />} />
+            <Route path="/currency" element={<Currency />} />
+          </Route>
 
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
-      <ToastContainer />
-    </Suspense>
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+        <ToastContainer />
+      </Suspense>
+    </>
   );
 };
 
