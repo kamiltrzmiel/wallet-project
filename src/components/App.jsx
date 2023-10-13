@@ -16,7 +16,7 @@ const App = () => {
   return (
     <Suspense>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -34,3 +34,5 @@ const App = () => {
 };
 
 export default App;
+
+// ----> // Route path="/" element={<Navigate to="/login" />
