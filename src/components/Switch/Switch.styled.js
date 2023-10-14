@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+const { styled } = require('styled-components');
 
 export const StyledSwitch = styled.div`
   display: flex;

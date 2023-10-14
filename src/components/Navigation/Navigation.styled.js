@@ -1,14 +1,29 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { Icon } from 'components/Icon/Icon';
+import { motion } from 'framer-motion';
 
-export const NavContainer = styled.nav`
+export const NavContainer = styled(motion.nav)`
   margin: 0;
   padding: 0;
   min-width: 280px;
   display: flex;
   justify-content: center;
-  @media (min-width: 768px) {
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     display: inline-block;
+  }
+  ${Icon} {
+    fill: var(--nav-color-inactive);
+    width: 44px;
+    height: 44px;
+    position: relative;
+    transition: fill 150ms, box-shadow 150ms;
+    border-radius: 5px;
+    @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+      width: 23px;
+      height: 23px;
+      border-radius: 2px;
+    }
   }
 `;
 
@@ -19,7 +34,7 @@ export const NavList = styled.ul`
   display: flex;
   gap: 30px;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     flex-direction: column;
     gap: 15px;
     & > :last-of-type {
@@ -44,22 +59,27 @@ export const StyledNavLink = styled(NavLink)`
   outline: none;
   &:focus,
   &:hover {
+    ${Icon} {
+      fill: var(--nav-color-active);
+      transition: fill 150ms, box-shadow 150ms;
+      box-shadow: 0px 3px 10px rgba(74, 86, 226, 0.5);
+    }
   }
   &:focus {
     span {
       transition: color 150ms;
     }
   }
-  @media (min-width: 768px) {
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     gap: 20px;
   }
 `;
 
 export const NavItemText = styled.span`
   display: none;
-  @media (min-width: 768px) {
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     display: inline;
-    color: #000;
+    color: var(--font-color-dark);
     transition: color 150ms;
     font-family: Poppins;
     font-size: 18px;
@@ -67,7 +87,7 @@ export const NavItemText = styled.span`
     font-weight: 400;
     line-height: 18px;
     &:hover {
-      color: #4e58dd;
+      color: var(--nav-color-active);
       transition: color 150ms;
     }
   }
