@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import { object, string, date, bool, mixed, number } from 'yup';
 
@@ -74,9 +74,12 @@ const AddTransactionModal = () => {
     };
   });
 
+  // const user = useSelector(state => state.session.user);
+
   const handleSubmit = values => {
     dispatch(
       addTransaction({
+        // user: user.id,
         amount: values.value,
         comment: values.comment,
         date: values.date,

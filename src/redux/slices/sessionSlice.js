@@ -163,12 +163,12 @@ export const sessionSlice = createSlice({
     });
 
     builder.addCase(login.fulfilled, (state, action) => {
-      const { token, name, email } = action.payload;
+      const { token, name, email, id } = action.payload;
 
       setAuthToken(token);
 
       state.isLoading = false;
-      state.user = { name, email };
+      state.user = { name, email, id };
       state.isAuth = true;
       state.error = null;
     });
