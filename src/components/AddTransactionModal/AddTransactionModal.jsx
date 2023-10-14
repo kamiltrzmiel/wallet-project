@@ -82,10 +82,10 @@ const AddTransactionModal = () => {
     dispatch(
       addTransaction({
         amount: values.value,
-        comment: values.comment,
-        date: values.date,
         category: isChecked ? 'income' : values.category.label,
+        date: values.date,
         isIncome: isChecked,
+        comment: values.comment,
       })
     )
       .then(() => dispatch(fetchTransactions()))

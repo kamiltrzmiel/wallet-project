@@ -83,10 +83,10 @@ const EditTransactionModal = () => {
         id: selectedTransactionToEdit._id,
         updatedData: {
           amount: values.value,
-          comment: values.comment,
-          date: values.date,
           category: values.category.label,
+          date: values.date,
           isIncome: selectedTransactionToEdit.isIncome,
+          comment: values.comment,
         },
       })
     ).then(() => dispatch(fetchTransactions()));
