@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import { theme } from './styles/theme';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store, { persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -20,9 +20,9 @@ root.render(
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
-          <BrowserRouter basename={process.env.PUBLIC_URL}>
+          <HashRouter>
             <App />
-          </BrowserRouter>
+          </HashRouter>
         </ThemeProvider>
       </PersistGate>
     </Provider>
