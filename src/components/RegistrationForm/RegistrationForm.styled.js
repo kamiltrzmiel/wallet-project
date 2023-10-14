@@ -44,7 +44,7 @@ export const Logo = styled.div`
 
 export const FormikField = styled(Field)`
   border: none;
-  border-bottom: 1px #e0e0e0 solid;
+  border-bottom: 1px var(--color-switch-main) solid;
   font-family: circe;
   font-size: 18px;
   font-style: normal;
@@ -52,7 +52,7 @@ export const FormikField = styled(Field)`
   line-height: 1.33;
 
   padding: 3.54px 0px 3.54px 54.5px;
-  background-color: #fff;
+  background-color: var(--background-light);
   &:focus {
     outline: none;
     background-color: transparent;
@@ -71,7 +71,7 @@ export const FormGroup = styled.div`
   }
   &:focus-within {
     svg {
-      fill: #4a55e2;
+      fill: var(--color-brand-primary);
     }
   }
 `;
@@ -81,7 +81,7 @@ export const StyledIcon = styled.svg`
   top: 50%;
   transform: translateY(-50%);
   left: 12.5px;
-  fill: #e0e0e0;
+  fill: var(--color-switch-main);
   transition: fill 0.3s ease-in;
 `;
 
@@ -92,13 +92,13 @@ export const ErrorMsg = styled(ErrorMessage)`
 
 export const Register = styled.button`
   margin-top: 8px;
-  background-color: #24cca7;
+  background-color: var(--color-brand-secondary);
   outline: none;
-  border: 1px #000 solid;
+  border: 1px var(--font-color-dark) solid;
   border-radius: 20px;
   max-width: 280px;
   font-size: 18px;
-  color: #fff;
+  color: var(--background-light);
   text-transform: uppercase;
   font-family: circle;
   padding: 13px 97px;
@@ -115,13 +115,13 @@ export const Register = styled.button`
 `;
 
 export const StyledLink = styled(NavLink)`
-  background-color: #fff;
+  background-color: var(--background-light);
   outline: none;
-  border: 1px #4a56e2 solid;
+  border: 1px var(--color-brand-primary) solid;
   border-radius: 20px;
   max-width: 280px;
   font-size: 18px;
-  color: #4a56e2;
+  color: var(--color-brand-primary);
   text-transform: uppercase;
   font-family: circle;
   text-decoration: none;
@@ -131,8 +131,8 @@ export const StyledLink = styled(NavLink)`
   transition: background-color 0.3s ease, color 0.3s ease;
   &:hover {
     opacity: 0.8;
-    background-color: #4a56e2;
-    color: #fff;
+    background-color: var(--color-brand-primary);
+    color: var(--background-light);
   }
   @media (min-width: 768px) {
     max-width: 300px;
@@ -154,7 +154,7 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   z-index: 101;
-  background-color: #fff;
+  background-color: var(--background-light);
   padding: 20px;
   border-radius: 20px;
 

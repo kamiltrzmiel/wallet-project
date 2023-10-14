@@ -94,6 +94,7 @@ const LoginForm = () => {
                 id="email"
                 name="email"
                 placeholder="E-mail"
+                autoComplete="username"
               />
               <ErrorMsg name="email" component="div" />
             </FormGroup>
@@ -106,6 +107,7 @@ const LoginForm = () => {
                 id="password"
                 name="password"
                 placeholder="Password"
+                autoComplete="current-password"
               />
               <ErrorMsg name="password" component="div" />
             </FormGroup>

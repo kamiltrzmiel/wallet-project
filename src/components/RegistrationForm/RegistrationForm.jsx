@@ -113,6 +113,7 @@ const RegistrationForm = () => {
                   id="email"
                   name="email"
                   placeholder="E-mail"
+                  autoComplete="username"
                 />
                 <ErrorMsg name="email" component="div" />
               </FormGroup>
@@ -127,6 +128,7 @@ const RegistrationForm = () => {
                   id="password"
                   name="password"
                   placeholder="Password"
+                  autoComplete="new-password"
                   onInput={e => {
                     setPassword(e.target.value);
                   }}
@@ -145,6 +147,7 @@ const RegistrationForm = () => {
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder="confirm Password"
+                  autoComplete="new-password"
                 />
                 <ErrorMsg name="confirmPassword" component="div" />
               </FormGroup>
