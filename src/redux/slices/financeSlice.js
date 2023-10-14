@@ -125,7 +125,8 @@ export const fetchTotals = createAsyncThunk(
     dispatch(setIsLoading(true));
     try {
       const response = await getCategoryTotals();
-      return response;
+
+      return response.summary;
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         throw new Error(error.response.data.error);

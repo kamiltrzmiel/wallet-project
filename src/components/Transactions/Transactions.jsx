@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsModalEditTransactionOpen } from 'redux/slices/globalSlice';
-import { removeTransaction } from 'redux/slices/financeSlice';
+import { removeTransaction, fetchTotals } from 'redux/slices/financeSlice';
 import { makeProperDate, formatDate } from 'utilities/formatUtils';
 import {
   formatStringWithSpaces,
@@ -32,6 +32,7 @@ const Transactions = () => {
 
   const deleteHandler = id => {
     dispatch(removeTransaction(id));
+    dispatch(fetchTotals());
   };
 
   return (
