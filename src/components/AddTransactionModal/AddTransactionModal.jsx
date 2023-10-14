@@ -11,7 +11,11 @@ import Textarea from 'components/Inputs/Textarea';
 import { PrimaryButton } from 'components/Buttons/Buttons';
 import { Icon } from 'components/Icon/Icon';
 
-import { addTransaction, fetchTransactions } from 'redux/slices/financeSlice';
+import {
+  addTransaction,
+  fetchTransactions,
+  fetchTotals,
+} from 'redux/slices/financeSlice';
 import { setIsModalAddTransactionOpen } from 'redux/slices/globalSlice';
 import { formatDate } from 'utilities/formatUtils';
 import { dateTransformer } from 'utilities/formatUtils';
@@ -86,7 +90,9 @@ const AddTransactionModal = () => {
         category: isChecked ? 'income' : values.category.label,
         isIncome: isChecked,
       })
-    ).then(() => dispatch(fetchTransactions()));
+    )
+      .then(() => dispatch(fetchTransactions()))
+      .then(() => dispatch(fetchTotals()));
 
     dispatch(setIsModalAddTransactionOpen(false));
     document.body.style.overflow = 'unset';
