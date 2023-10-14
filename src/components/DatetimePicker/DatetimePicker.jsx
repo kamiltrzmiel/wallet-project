@@ -16,7 +16,7 @@ const DatetimePicker = ({ ...props }) => {
       }}
       selected={field.value}
       onChange={value => {
-        helpers.setValue(moment(value).format('DD.MM.YYYY'));
+        helpers.setValue(moment(value).format('DD-MM-YYYY'));
       }}
     />
   );

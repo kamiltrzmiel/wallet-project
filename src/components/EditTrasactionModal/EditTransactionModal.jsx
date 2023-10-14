@@ -184,7 +184,7 @@ const EditTransactionModal = () => {
                 </InputWrapper>
                 <CalendarWrapper>
                   <DatetimePicker
-                    dateFormat="DD.MM.YYYY"
+                    dateFormat="DD-MM-YYYY"
                     name="date"
                     type="date"
                     timeFormat={false}

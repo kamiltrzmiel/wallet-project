@@ -1,11 +1,11 @@
 import moment from 'moment';
 
 export const formatDate = inputString =>
-  moment(inputString, 'DD MM YYYY HH:mm:ss GMTZZ').format('DD.MM.YYYY');
+  moment(inputString, 'DD MM YYYY HH:mm:ss GMTZZ').format('DD-MM-YYYY');
 
 export const dateTransformer = (_, originalValue) =>
-  moment(originalValue, 'DD.MM.YYYY').isValid()
-    ? moment(originalValue, 'DD.MM.YYYY').toDate()
+  moment(originalValue, 'DD-MM-YYYY').isValid()
+    ? moment(originalValue, 'DD-MM-YYYY').toDate()
     : new Date('');
 
 export const getCharacterValidationError = str =>
