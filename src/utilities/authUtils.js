@@ -4,9 +4,7 @@ import Cookies from 'js-cookie';
 
 export const API_URL = 'https://modern-gold-fatigues.cyclic.app/api';
 
-const WalletInstance = axios.create({
-  withCredentials: true,
-});
+const WalletInstance = axios.create();
 export { WalletInstance };
 
 // let dispatchFunction;
