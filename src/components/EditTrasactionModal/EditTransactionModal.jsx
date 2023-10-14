@@ -50,7 +50,7 @@ const EditTransactionModal = () => {
   const dispatch = useDispatch();
 
   const selectedTransactionToEdit = useSelector(
-    state => state => state.finance.currentTransactionToEdit
+    state => state.finance.currentTransactionToEdit
   );
 
   const handleCloseEditModal = () => {
