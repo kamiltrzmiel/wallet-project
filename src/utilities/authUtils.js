@@ -4,7 +4,9 @@ import Cookies from 'js-cookie';
 
 export const API_URL = 'https://modern-gold-fatigues.cyclic.app/api';
 
-const WalletInstance = axios.create();
+const WalletInstance = axios.create({
+  withCredentials: true,
+});
 export { WalletInstance };
 
 // let dispatchFunction;
@@ -14,11 +16,9 @@ export const setDispatch = dispatch => {
 };
 
 export const setAuthToken = () => {
-
   const token = Cookies.get('token');
   if (token) {
     WalletInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
   } else {
     delete WalletInstance.defaults.headers.common['Authorization'];
   }
@@ -71,7 +71,6 @@ export const cookieOptions = {
 //   },
 //   async error => {
 //     const originalRequest = error.config;
-
 
 //     if (error.response && error.response.status === 401 && !originalRequest._retry) {
 
