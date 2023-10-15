@@ -52,11 +52,12 @@ export const addTransaction = createAsyncThunk(
       await createTransaction(transactionData);
       // return response;
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
-        throw new Error(error.response.data.error);
-      } else {
-        throw error;
-      }
+      console.log(error.message);
+      // if (error.response && error.response.data && error.response.data.error) {
+      //   throw new Error(error.response.data.error);
+      // } else {
+      //   throw error;
+      // }
     } finally {
       dispatch(setIsLoading(false));
     }
