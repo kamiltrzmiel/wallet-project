@@ -3,25 +3,32 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { formatBalance } from 'utilities/numberUtils';
 import { ChartContainer, Balance } from './Chart.styled';
+import { getRandomColor } from 'utilities/getRandomColor';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart = () => {
   const { totals, monthlyTotals } = useSelector(state => state.finance);
+  const balance = useSelector(state => state.finance.totals.balance);
 
-  const showTotals = monthlyTotals && monthlyTotals.totals;
-  const dataToMap = showTotals ? monthlyTotals.totals : totals.totals;
+  const showTotals = monthlyTotals && monthlyTotals.transactions;
+  const dataToMap = showTotals
+    ? monthlyTotals.transactions
+    : totals.totalExpensesByCategories;
 
-  if (!dataToMap || totals.totals.length === 0) {
+  if (!dataToMap || totals.totalExpensesByCategories.length === 0) {
     return null;
   }
   const labels = dataToMap.map(item => item.category);
-  const backgroundColors = dataToMap.map(item => item.color);
-  const dataValues = dataToMap.map(item => item.sum);
+  const dataValues = dataToMap.map(item => item.amount);
 
-  const balance = showTotals
-    ? monthlyTotals.difference
-    : totals.difference || 0;
+  const backgroundColors = [];
+  const numberOfColorsToGenerate = labels.length;
+
+  for (let i = 0; i < numberOfColorsToGenerate; i++) {
+    const color = getRandomColor(backgroundColors);
+    backgroundColors.push(color);
+  }
 
   const chartData = {
     labels: labels,

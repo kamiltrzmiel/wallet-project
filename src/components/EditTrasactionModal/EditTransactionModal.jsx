@@ -83,10 +83,10 @@ const EditTransactionModal = () => {
         id: selectedTransactionToEdit._id,
         updatedData: {
           amount: values.value,
-          comment: values.comment,
-          date: values.date,
           category: values.category.label,
+          date: values.date,
           isIncome: selectedTransactionToEdit.isIncome,
+          comment: values.comment,
         },
       })
     ).then(() => dispatch(fetchTransactions()));
@@ -184,7 +184,7 @@ const EditTransactionModal = () => {
                 </InputWrapper>
                 <CalendarWrapper>
                   <DatetimePicker
-                    dateFormat="DD.MM.YYYY"
+                    dateFormat="DD-MM-YYYY"
                     name="date"
                     type="date"
                     timeFormat={false}

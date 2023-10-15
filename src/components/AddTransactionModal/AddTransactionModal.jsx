@@ -11,7 +11,11 @@ import Textarea from 'components/Inputs/Textarea';
 import { PrimaryButton } from 'components/Buttons/Buttons';
 import { Icon } from 'components/Icon/Icon';
 
-import { addTransaction, fetchTransactions } from 'redux/slices/financeSlice';
+import {
+  addTransaction,
+  fetchTransactions,
+  fetchTotals,
+} from 'redux/slices/financeSlice';
 import { setIsModalAddTransactionOpen } from 'redux/slices/globalSlice';
 import { formatDate } from 'utilities/formatUtils';
 import { dateTransformer } from 'utilities/formatUtils';
@@ -78,12 +82,14 @@ const AddTransactionModal = () => {
     dispatch(
       addTransaction({
         amount: values.value,
-        comment: values.comment,
-        date: values.date,
         category: isChecked ? 'income' : values.category.label,
+        date: values.date,
         isIncome: isChecked,
+        comment: values.comment,
       })
-    ).then(() => dispatch(fetchTransactions()));
+    )
+      .then(() => dispatch(fetchTransactions()))
+      .then(() => dispatch(fetchTotals()));
 
     dispatch(setIsModalAddTransactionOpen(false));
     document.body.style.overflow = 'unset';
@@ -177,7 +183,7 @@ const AddTransactionModal = () => {
                 </InputWrapper>
                 <CalendarWrapper>
                   <DatetimePicker
-                    dateFormat="DD.MM.YYYY"
+                    dateFormat="DD-MM-YYYY"
                     name="date"
                     type="date"
                     timeFormat={false}
