@@ -98,23 +98,6 @@ const DiagramTableBase = () => {
     }
   };
 
-  // const sumAmountByCategory = monthlyTotals => {
-  //   const categorySums = {};
-
-  //   for (const entry of monthlyTotals) {
-  //     const category = entry.category;
-  //     const amount = entry.amount;
-
-  //     if (!categorySums[category]) {
-  //       categorySums[category] = 0;
-  //     }
-
-  //     categorySums[category] += amount;
-  //   }
-
-  //   return categorySums;
-  // };
-
   const sumAmountByCategory = monthlyTotals => {
     const categorySums = [];
 
@@ -122,16 +105,13 @@ const DiagramTableBase = () => {
       const category = entry.category;
       const amount = entry.amount;
 
-      // Sprawdzamy, czy istnieje już obiekt dla danej kategorii w categorySums
       const categoryObject = categorySums.find(
         obj => obj.category === category
       );
 
       if (categoryObject) {
-        // Jeśli kategoria już istnieje, dodajemy do niej kwotę
         categoryObject.amount += amount;
       } else {
-        // Jeśli kategoria nie istnieje, tworzymy nowy obiekt
         categorySums.push({ category, amount });
       }
     }
@@ -172,9 +152,6 @@ const DiagramTableBase = () => {
   const dataToMap = showTotals
     ? monthlyTotalsByCategory
     : totals.totalExpensesByCategories;
-
-  console.log('miesięczna całość na kategorie', monthlyTotalsByCategory);
-  console.log('całościowa całość', totals.totalExpensesByCategories);
 
   const sumExpenses = showTotals
     ? monthlyIncomeAndExpenses.monthlyExpenses
