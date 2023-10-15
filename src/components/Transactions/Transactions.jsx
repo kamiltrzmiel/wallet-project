@@ -23,8 +23,15 @@ const Transactions = () => {
   const dispatch = useDispatch();
 
   const sortedTransactions = transactions.slice().sort((a, b) => {
-    return makeProperDate(b.date) - makeProperDate(a.date);
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    return dateA - dateB;
   });
+
+  // const sortedTransactions = transactions.slice().sort((a, b) => {
+  //   return makeProperDate(b.date) - makeProperDate(a.date);
+  // });
 
   const handleOpenEditModal = () => {
     dispatch(setIsModalEditTransactionOpen(true));
