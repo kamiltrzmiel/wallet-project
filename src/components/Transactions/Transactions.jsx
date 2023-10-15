@@ -27,7 +27,10 @@ const Transactions = () => {
   const dispatch = useDispatch();
 
   const sortedTransactions = transactions.slice().sort((a, b) => {
-    return makeProperDate(b.date) - makeProperDate(a.date);
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    return dateA - dateB;
   });
 
   const handleOpenEditModal = ({
@@ -41,8 +44,7 @@ const Transactions = () => {
     dispatch(
       setTransactionToEdit({ _id, amount, date, isIncome, category, comment })
     );
-    dispatch(setIsModalEditTransactionOpen(true));
-  };
+
 
   const deleteHandler = id => {
     dispatch(removeTransaction(id));
