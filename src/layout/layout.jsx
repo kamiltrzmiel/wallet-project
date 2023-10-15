@@ -10,6 +10,7 @@ import AsideMenu from 'components/Asidebar/Asidebar';
 import ButtonAddTransaction from 'components/ButtonAddTransaction/ButtonAddTransaction';
 import { Outlet } from 'react-router-dom';
 import { Container } from 'components/Container/Container.styled';
+import Loader from 'components/Loader/Loader';
 
 const Layout = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth > 767);
@@ -36,7 +37,7 @@ const Layout = () => {
               {windowWidth && location.pathname === '/home' && (
                 <ButtonAddTransaction />
               )}
-              <Suspense>
+              <Suspense fallback={<Loader />}>
                 <Outlet />
               </Suspense>
             </MainContainer>
