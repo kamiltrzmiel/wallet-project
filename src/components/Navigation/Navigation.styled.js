@@ -9,9 +9,11 @@ export const NavContainer = styled(motion.nav)`
   min-width: 280px;
   display: flex;
   justify-content: center;
+
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     display: inline-block;
   }
+
   ${Icon} {
     fill: var(--nav-color-inactive);
     width: 44px;
@@ -19,6 +21,7 @@ export const NavContainer = styled(motion.nav)`
     position: relative;
     transition: fill 150ms, box-shadow 150ms;
     border-radius: 5px;
+
     @media (min-width: ${props => props.theme.breakpoints.tablet}) {
       width: 23px;
       height: 23px;
@@ -57,6 +60,7 @@ export const StyledNavLink = styled(NavLink)`
   flex-direction: row;
   gap: 20px;
   outline: none;
+
   &:focus,
   &:hover {
     ${Icon} {
@@ -65,11 +69,13 @@ export const StyledNavLink = styled(NavLink)`
       box-shadow: 0px 3px 10px rgba(74, 86, 226, 0.5);
     }
   }
+
   &:focus {
     span {
       transition: color 150ms;
     }
   }
+
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     gap: 20px;
   }
@@ -77,6 +83,7 @@ export const StyledNavLink = styled(NavLink)`
 
 export const NavItemText = styled.span`
   display: none;
+
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     display: inline;
     color: var(--font-color-dark);
@@ -86,6 +93,7 @@ export const NavItemText = styled.span`
     font-style: normal;
     font-weight: 400;
     line-height: 18px;
+
     &:hover {
       color: var(--nav-color-active);
       transition: color 150ms;

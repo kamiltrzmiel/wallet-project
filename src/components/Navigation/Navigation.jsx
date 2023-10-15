@@ -1,4 +1,6 @@
 import React from 'react';
+import { Icon } from 'components/Icon/Icon';
+
 import {
   NavContainer,
   NavItem,
@@ -12,19 +14,38 @@ const Navigation = () => {
     <NavContainer>
       <NavList>
         <NavItem>
-          <StyledNavLink to={`/home`}>
+          <StyledNavLink
+            to={`/home`}
+            className={({ isActive }) =>
+              isActive ? 'activelink' : NavContainer
+            }
+          >
+            <Icon icon="icon__baseline-home" />
             <NavItemText>Home</NavItemText>
           </StyledNavLink>
         </NavItem>
 
         <NavItem>
-          <StyledNavLink to={`/diagram`}>
+          <StyledNavLink
+            to={`/diagram`}
+            className={({ isActive }) =>
+              isActive ? 'activelink' : NavContainer
+            }
+          >
+            <Icon icon="icon__baseline-timeline" />
             <NavItemText>Statistics</NavItemText>
           </StyledNavLink>
         </NavItem>
 
         <NavItem>
-          <StyledNavLink to={`/currency`} />
+          <StyledNavLink
+            to={`/currency`}
+            className={({ isActive }) =>
+              isActive ? 'activelink' : NavContainer
+            }
+          >
+            <Icon icon="icon__baseline-dolar" />
+          </StyledNavLink>
         </NavItem>
       </NavList>
     </NavContainer>
