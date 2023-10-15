@@ -8,25 +8,19 @@ import { getRandomColor } from 'utilities/getRandomColor';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart = () => {
-  const { totals } = useSelector(state => state.finance);
-  // const { totals, monthlyTotals } = useSelector(state => state.finance);
+  const { totals, monthlyTotals } = useSelector(state => state.finance);
   const balance = useSelector(state => state.finance.totals.balance);
 
-  // const showTotals = monthlyTotals && monthlyTotals.totals;
-  // const dataToMap = showTotals
-  //   ? monthlyTotals.totals
-  //   : totals.totalExpensesByCategories;
-  const dataToMap = totals.totalExpensesByCategories;
+  const showTotals = monthlyTotals && monthlyTotals.transactions;
+  const dataToMap = showTotals
+    ? monthlyTotals.transactions
+    : totals.totalExpensesByCategories;
 
   if (!dataToMap || totals.totalExpensesByCategories.length === 0) {
     return null;
   }
   const labels = dataToMap.map(item => item.category);
   const dataValues = dataToMap.map(item => item.amount);
-
-  // const balance = showTotals
-  //   ? monthlyTotals.difference
-  //   : totals.difference || 0;
 
   const backgroundColors = [];
   const numberOfColorsToGenerate = labels.length;
