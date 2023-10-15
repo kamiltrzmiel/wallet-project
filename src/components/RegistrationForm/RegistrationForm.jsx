@@ -47,13 +47,13 @@ const initialValues = {
 const RegistrationForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isAuth = useSelector(state => state.session.isAuth);
+  // const isAuth = useSelector(state => state.session.isAuth);
 
-  useEffect(() => {
-    if (isAuth) {
-      navigate('/home');
-    }
-  }, [isAuth, navigate]);
+  // useEffect(() => {
+  //   if (isAuth) {
+  //     navigate('/home');
+  //   }
+  // }, [isAuth, navigate]);
 
   const handleSubmit = values => {
     dispatch(
@@ -63,6 +63,7 @@ const RegistrationForm = () => {
         password: values.password,
       })
     );
+    navigate('/login');
   };
 
   const [showFinance, setShowFinance] = useState(false);

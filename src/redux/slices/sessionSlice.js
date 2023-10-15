@@ -33,7 +33,6 @@ export const register = createAsyncThunk(
       throw error;
     } finally {
       dispatch(setIsLoading(false));
-      login();
     }
   }
 );
@@ -148,7 +147,8 @@ export const sessionSlice = createSlice({
 
       state.isLoading = false;
       state.user = { email, name };
-      state.isAuth = true;
+      // state.isAuth = true;
+      state.isAuth = false;
       state.error = null;
     });
 
