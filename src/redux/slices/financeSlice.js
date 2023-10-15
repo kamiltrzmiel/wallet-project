@@ -48,16 +48,10 @@ export const addTransaction = createAsyncThunk(
   async (transactionData, { dispatch }) => {
     dispatch(setIsLoading(true));
     try {
-      // const response =
-      await createTransaction(transactionData);
-      // return response;
+      const response = await createTransaction(transactionData);
+      return response;
     } catch (error) {
-      console.log(error);
-      // if (error.response && error.response.data && error.response.data.error) {
-      //   throw new Error(error.response.data.error);
-      // } else {
-      //   throw error;
-      // }
+      throw new Error(error.message);
     } finally {
       dispatch(setIsLoading(false));
     }
@@ -257,7 +251,7 @@ export const transactionsSlice = createSlice({
 
       .addCase(addTransaction.pending, startLoading)
       .addCase(addTransaction.fulfilled, (state, _) => {
-        //  state.transactions.push(action.payload);
+        state.transactions.push(action.payload);
         handleSuccess(state);
       })
       .addCase(addTransaction.rejected, handleError)
