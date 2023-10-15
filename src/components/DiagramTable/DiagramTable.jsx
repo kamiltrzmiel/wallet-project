@@ -21,7 +21,10 @@ import {
   Sum,
 } from './DiagramTable.styled';
 import styled from 'styled-components';
-import { formatStringWithSpaces, MakeDecimalPlaces } from 'utilities/formatUtils';
+import {
+  formatStringWithSpaces,
+  MakeDecimalPlaces,
+} from 'utilities/formatUtils';
 
 const months = [
   { id: 1, name: 'January' },
@@ -95,15 +98,89 @@ const DiagramTableBase = () => {
     }
   };
 
+  // const sumAmountByCategory = monthlyTotals => {
+  //   const categorySums = {};
+
+  //   for (const entry of monthlyTotals) {
+  //     const category = entry.category;
+  //     const amount = entry.amount;
+
+  //     if (!categorySums[category]) {
+  //       categorySums[category] = 0;
+  //     }
+
+  //     categorySums[category] += amount;
+  //   }
+
+  //   return categorySums;
+  // };
+
+  const sumAmountByCategory = monthlyTotals => {
+    const categorySums = [];
+
+    for (const entry of monthlyTotals) {
+      const category = entry.category;
+      const amount = entry.amount;
+
+      // Sprawdzamy, czy istnieje już obiekt dla danej kategorii w categorySums
+      const categoryObject = categorySums.find(
+        obj => obj.category === category
+      );
+
+      if (categoryObject) {
+        // Jeśli kategoria już istnieje, dodajemy do niej kwotę
+        categoryObject.amount += amount;
+      } else {
+        // Jeśli kategoria nie istnieje, tworzymy nowy obiekt
+        categorySums.push({ category, amount });
+      }
+    }
+
+    return categorySums;
+  };
+
+  const monthlyTotalsByCategory =
+    Object.keys(monthlyTotals).length === 0
+      ? null
+      : sumAmountByCategory(monthlyTotals);
+
+  const sumMonthlyIncomeAndExpenses = monthlyTotals => {
+    let monthlyIncome = 0;
+    let monthlyExpenses = 0;
+
+    for (const entry of monthlyTotals) {
+      const isIncome = entry.isIncome;
+      const amount = entry.amount;
+
+      if (isIncome) {
+        monthlyIncome += amount;
+      } else {
+        monthlyExpenses += amount;
+      }
+    }
+
+    return { monthlyIncome, monthlyExpenses };
+  };
+
+  const monthlyIncomeAndExpenses =
+    Object.keys(monthlyTotals).length === 0
+      ? null
+      : sumMonthlyIncomeAndExpenses(monthlyTotals);
+
   const showTotals =
-    selectedMonth && selectedYear && monthlyTotals && monthlyTotals.totals;
-  const dataToMap = showTotals ? monthlyTotals.totals : totals.totals;
+    selectedMonth && selectedYear && monthlyTotals && monthlyTotalsByCategory;
+  const dataToMap = showTotals
+    ? monthlyTotalsByCategory
+    : totals.totalExpensesByCategories;
+
+  console.log('miesięczna całość na kategorie', monthlyTotalsByCategory);
+  console.log('całościowa całość', totals.totalExpensesByCategories);
 
   const sumExpenses = showTotals
-    ? monthlyTotals.totalExpenses
+    ? monthlyIncomeAndExpenses.monthlyExpenses
     : totals.totalExpenses || 0;
   const sumIncome = showTotals
-    ? monthlyTotals.totalIncome
+    ? monthlyIncomeAndExpenses.monthlyIncome
     : totals.totalIncome || 0;
   const formatSum = num => formatStringWithSpaces(MakeDecimalPlaces(num));
 
@@ -135,7 +212,7 @@ const DiagramTableBase = () => {
                 style={{ backgroundColor: item.color }}
               ></ColorCategory>
               <Category>{item.category}</Category>
-              <Sum>{formatSum(item.sum) || 0}</Sum>
+              <Sum>{formatSum(item.amount) || 0}</Sum>
             </ListItem>
           ))
         ) : (

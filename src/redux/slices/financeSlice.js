@@ -141,7 +141,8 @@ export const fetchMonthlyTotals = createAsyncThunk(
     dispatch(setIsLoading(true));
     try {
       const response = await getMonthlyCategoryTotals(month, year);
-      return response;
+
+      return response.transactions;
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         throw new Error(error.response.data.error);
