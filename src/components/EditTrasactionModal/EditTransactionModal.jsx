@@ -11,7 +11,11 @@ import { PrimaryButton } from 'components/Buttons/Buttons';
 import { Icon } from 'components/Icon/Icon';
 import { customStyles } from 'components/CategorySelect/CategorySelect.styled';
 
-import { editTransaction, fetchTransactions } from 'redux/slices/financeSlice';
+import {
+  editTransaction,
+  fetchTransactions,
+  fetchTotals,
+} from 'redux/slices/financeSlice';
 import { setIsModalEditTransactionOpen } from 'redux/slices/globalSlice';
 import { formatDate } from 'utilities/formatUtils';
 import { dateTransformer } from 'utilities/formatUtils';
@@ -89,7 +93,10 @@ const EditTransactionModal = () => {
           comment: values.comment,
         },
       })
-    ).then(() => dispatch(fetchTransactions()));
+    )
+      .then(() => dispatch(fetchTransactions()))
+      .then(() => dispatch(fetchTotals()));
+    // dispatch(fetchTotals());
     dispatch(setIsModalEditTransactionOpen(false));
     document.body.style.overflow = 'unset';
   };

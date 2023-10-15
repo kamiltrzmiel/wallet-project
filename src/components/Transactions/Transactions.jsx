@@ -5,7 +5,7 @@ import {
   fetchTotals,
   setTransactionToEdit,
 } from 'redux/slices/financeSlice';
-import { makeProperDate, formatDate } from 'utilities/formatUtils';
+import { formatDate } from 'utilities/formatUtils';
 import {
   formatStringWithSpaces,
   MakeDecimalPlaces,
@@ -44,7 +44,8 @@ const Transactions = () => {
     dispatch(
       setTransactionToEdit({ _id, amount, date, isIncome, category, comment })
     );
-
+    dispatch(setIsModalEditTransactionOpen(true));
+  };
 
   const deleteHandler = id => {
     dispatch(removeTransaction(id));

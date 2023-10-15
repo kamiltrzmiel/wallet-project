@@ -250,7 +250,7 @@ export const transactionsSlice = createSlice({
       .addCase(fetchTransactions.rejected, handleError)
 
       .addCase(addTransaction.pending, startLoading)
-      .addCase(addTransaction.fulfilled, (state, _) => {
+      .addCase(addTransaction.fulfilled, (state, action) => {
         state.transactions.push(action.payload);
         handleSuccess(state);
       })
