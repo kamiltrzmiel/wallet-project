@@ -26,11 +26,12 @@ const Transactions = () => {
   const { transactions } = useSelector(state => state.finance);
   const dispatch = useDispatch();
 
-  const sortedTransactions = transactions.slice().sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
+  const sortedTransactions = [...transactions];
+  sortedTransactions.sort((a, b) => {
+    const dateA = a.date.split('-').reverse().join('-');
+    const dateB = b.date.split('-').reverse().join('-');
 
-    return dateA - dateB;
+    return dateA.localeCompare(dateB);
   });
 
   const handleOpenEditModal = ({
