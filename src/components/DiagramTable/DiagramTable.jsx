@@ -153,12 +153,6 @@ const DiagramTableBase = () => {
     ? monthlyTotalsByCategory
     : totals.totalExpensesByCategories;
 
-  const sumExpenses = showTotals
-    ? monthlyIncomeAndExpenses.monthlyExpenses
-    : totals.totalExpenses || 0;
-  const sumIncome = showTotals
-    ? monthlyIncomeAndExpenses.monthlyIncome
-    : totals.totalIncome || 0;
   const formatSum = num => formatStringWithSpaces(MakeDecimalPlaces(num));
 
   return (
@@ -182,32 +176,40 @@ const DiagramTableBase = () => {
         <h3>Sum</h3>
       </BoxHeading>
       <List>
-        {showTotals ? (
-          dataToMap?.length > 0 ? (
-            dataToMap.map((item, index) => (
-              <ListItem key={index}>
-                <ColorCategory
-                  style={{ backgroundColor: item.color }}
-                ></ColorCategory>
-                <Category>{item.category}</Category>
-                <Sum>{formatSum(item.amount) || 0}</Sum>
-              </ListItem>
-            ))
-          ) : (
-            <li></li>
-          )
-        ) : (
+        {selectedMonth && !showTotals ? (
           <EmptyLi>
             The list of transactions in the selected month is empty!
           </EmptyLi>
+        ) : dataToMap?.length > 0 ? (
+          dataToMap.map((item, index) => (
+            <ListItem key={index}>
+              <ColorCategory
+                style={{ backgroundColor: item.color }}
+              ></ColorCategory>
+              <Category>{item.category}</Category>
+              <Sum>{formatSum(item.amount) || 0}</Sum>
+            </ListItem>
+          ))
+        ) : (
+          <li></li>
         )}
       </List>
       <BoxFooter>
         <Expenses>
-          Expenses: <span>{formatSum(sumExpenses)}</span>
+          Expenses:{' '}
+          <span>
+            {showTotals && formatSum(monthlyIncomeAndExpenses.monthlyExpenses)}
+            {!showTotals && !selectedMonth && formatSum(totals.totalExpenses)}
+            {!showTotals && totals.totalExpenses && 0}
+          </span>
         </Expenses>
         <Income>
-          Income: <span>{formatSum(sumIncome)}</span>
+          Income:{' '}
+          <span>
+            {showTotals && formatSum(monthlyIncomeAndExpenses.monthlyIncome)}
+            {!showTotals && !selectedMonth && formatSum(totals.totalIncome)}
+            {!showTotals && totals.totalIncome && 0}
+          </span>
         </Income>
       </BoxFooter>
     </StyledTable>
