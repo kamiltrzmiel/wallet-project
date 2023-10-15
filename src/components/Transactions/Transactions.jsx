@@ -1,6 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsModalEditTransactionOpen } from 'redux/slices/globalSlice';
-import { removeTransaction, fetchTotals } from 'redux/slices/financeSlice';
+import {
+  removeTransaction,
+  fetchTotals,
+  setTransactionToEdit,
+} from 'redux/slices/financeSlice';
 import { makeProperDate, formatDate } from 'utilities/formatUtils';
 import {
   formatStringWithSpaces,
@@ -29,13 +33,18 @@ const Transactions = () => {
     return dateA - dateB;
   });
 
-  // const sortedTransactions = transactions.slice().sort((a, b) => {
-  //   return makeProperDate(b.date) - makeProperDate(a.date);
-  // });
+  const handleOpenEditModal = ({
+    _id,
+    amount,
+    date,
+    isIncome,
+    category,
+    comment,
+  }) => {
+    dispatch(
+      setTransactionToEdit({ _id, amount, date, isIncome, category, comment })
+    );
 
-  const handleOpenEditModal = () => {
-    dispatch(setIsModalEditTransactionOpen(true));
-  };
 
   const deleteHandler = id => {
     dispatch(removeTransaction(id));
@@ -54,7 +63,6 @@ const Transactions = () => {
           <TransactionsTableHeader />
         </TransactionsTableHeadRow>
       </TransactionsTableHead>
-
       <tbody>
         {sortedTransactions.map(
           ({ _id, amount, date, isIncome, category, comment }) => (
@@ -71,7 +79,19 @@ const Transactions = () => {
                 {formatStringWithSpaces(MakeDecimalPlaces(amount))}
               </TransactionTableData>
               <TransactionTableData>
-                <EditBtn type="button" onClick={handleOpenEditModal}>
+                <EditBtn
+                  type="button"
+                  onClick={() =>
+                    handleOpenEditModal({
+                      _id,
+                      amount,
+                      date,
+                      isIncome,
+                      category,
+                      comment,
+                    })
+                  }
+                >
                   <img
                     src={editIcon}
                     alt="edit icon"
