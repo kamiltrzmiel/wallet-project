@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
-  position: sticky;
+  position: absolute;
 
   align-self: flex-end;
   z-index: 99;
@@ -28,15 +28,17 @@ export const StyledButton = styled.button`
     top: 67%;
     left: 22px;
     transform: translate(-50%, -50%);
-    fill: #24cca8;
+    fill: var(--color-brand-secondary);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     position: absolute;
+    bottom: 40px;
+    right: 40px;
   }
-  @media (min-width: 1280px) {
+  @media (min-width: ${props => props.theme.breakpoints.desktop}) {
     position: absolute;
-    bottom: -40px;
+    bottom: 20px;
     right: 40px;
   }
 `;

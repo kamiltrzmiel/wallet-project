@@ -13,6 +13,7 @@ export const Section = styled.section`
   width: 100%;
   min-width: 320px;
   min-height: calc(100vh - 60px);
+  overflow-y: auto;
   @media (min-width: ${props => props.theme.breakpoints.tablet}) {
     min-height: calc(100vh - 80px);
     height: calc(100vh - 80px);
@@ -52,6 +53,6 @@ export const MainContainer = styled.main`
 
   @media (min-width: ${props => props.theme.breakpoints.desktop}) {
     padding: 46px 16px 0px 69px;
-    height: calc(100% - 90px);
+    height: calc(100% - 20px);
   }
 `;
