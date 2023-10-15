@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Layout from 'layout/layout';
 import WithAuthRedirect from 'routes/authRedirect';
 import TransactionsModalWrapper from './TransactionsModalWrapper/TransactionsModalWrapper';
 import Loader from './Loader/Loader';
