@@ -162,3 +162,8 @@ export const Income = styled.p`
     text-align: right;
   }
 `;
+
+export const EmptyLi = styled.li`
+  text-align: center;
+  margin-top: 20px;
+`;

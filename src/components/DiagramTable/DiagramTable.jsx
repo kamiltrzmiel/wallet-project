@@ -19,6 +19,7 @@ import {
   ListItem,
   StyledTable,
   Sum,
+  EmptyLi,
 } from './DiagramTable.styled';
 import styled from 'styled-components';
 import {
@@ -109,14 +110,12 @@ const DiagramTableBase = () => {
         obj => obj.category === category
       );
 
-      if (categoryObject) {
-        categoryObject.amount += amount;
-      } else {
-        categorySums.push({ category, amount });
-      }
+      categoryObject
+        ? (categoryObject.amount += amount)
+        : categorySums.push({ category, amount });
     }
 
-    return categorySums;
+    return categorySums.filter(obj => obj.category !== 'income');
   };
 
   const monthlyTotalsByCategory =
@@ -149,6 +148,7 @@ const DiagramTableBase = () => {
 
   const showTotals =
     selectedMonth && selectedYear && monthlyTotals && monthlyTotalsByCategory;
+
   const dataToMap = showTotals
     ? monthlyTotalsByCategory
     : totals.totalExpensesByCategories;
@@ -182,18 +182,24 @@ const DiagramTableBase = () => {
         <h3>Sum</h3>
       </BoxHeading>
       <List>
-        {dataToMap?.length > 0 ? (
-          dataToMap.map((item, index) => (
-            <ListItem key={index}>
-              <ColorCategory
-                style={{ backgroundColor: item.color }}
-              ></ColorCategory>
-              <Category>{item.category}</Category>
-              <Sum>{formatSum(item.amount) || 0}</Sum>
-            </ListItem>
-          ))
+        {showTotals ? (
+          dataToMap?.length > 0 ? (
+            dataToMap.map((item, index) => (
+              <ListItem key={index}>
+                <ColorCategory
+                  style={{ backgroundColor: item.color }}
+                ></ColorCategory>
+                <Category>{item.category}</Category>
+                <Sum>{formatSum(item.amount) || 0}</Sum>
+              </ListItem>
+            ))
+          ) : (
+            <li></li>
+          )
         ) : (
-          <li></li>
+          <EmptyLi>
+            The list of transactions in the selected month is empty!
+          </EmptyLi>
         )}
       </List>
       <BoxFooter>
