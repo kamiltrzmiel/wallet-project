@@ -45,7 +45,6 @@ export const Logo = styled.div`
 export const FormikField = styled(Field)`
   border: none;
   border-bottom: 1px var(--color-switch-main) solid;
-  font-family: circe;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
