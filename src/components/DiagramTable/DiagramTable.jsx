@@ -82,6 +82,7 @@ const yearOptions = year.map(option => ({
 
 const DiagramTableBase = () => {
   const dispatch = useDispatch();
+  const backgroundColors = useSelector(state => state.finance.colors);
   const { totals, monthlyTotals, transactions, selectedMonth, selectedYear } =
     useSelector(state => state.finance);
 
@@ -116,9 +117,17 @@ const DiagramTableBase = () => {
   const showTotals =
     selectedMonth && selectedYear && monthlyTotals && monthlyTotalsByCategory;
 
-  const dataToMap = showTotals
+  const originalDataToMap = showTotals
     ? monthlyTotalsByCategory
     : totals.totalExpensesByCategories;
+
+  let dataToMap;
+  if (originalDataToMap) {
+    const editedDataToMap = originalDataToMap.filter(
+      obj => obj['category'] !== 'Income'
+    );
+    dataToMap = editedDataToMap.filter(obj => obj['amount'] !== 0);
+  }
 
   const formatSum = num => formatStringWithSpaces(MakeDecimalPlaces(num));
 
@@ -151,7 +160,7 @@ const DiagramTableBase = () => {
           dataToMap.map((item, index) => (
             <ListItem key={index}>
               <ColorCategory
-                style={{ backgroundColor: item.color }}
+                style={{ backgroundColor: backgroundColors[index] }}
               ></ColorCategory>
               <Category>{item.category}</Category>
               <Sum>{formatSum(item.amount) || 0}</Sum>

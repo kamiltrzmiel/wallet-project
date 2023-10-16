@@ -3,7 +3,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { formatBalance } from 'utilities/numberUtils';
 import { ChartContainer, Balance } from './Chart.styled';
-import { getRandomColor } from 'utilities/getRandomColor';
 import {
   sumAmountByCategory,
   sumMonthlyIncomeAndExpenses,
@@ -16,6 +15,7 @@ const Chart = () => {
     state => state.finance
   );
   const totalBalance = useSelector(state => state.finance.totals.balance);
+  const backgroundColors = useSelector(state => state.finance.colors);
 
   const monthlyIncomeAndExpenses =
     Object.keys(monthlyTotals).length === 0
@@ -40,11 +40,17 @@ const Chart = () => {
     balance = totalBalance;
   }
 
-  const dataToMap = showTotals
+  const originalDataToMap = showTotals
     ? monthlyTotalsByCategory
     : totals.totalExpensesByCategories;
 
-  console.log('datki do mapki', dataToMap);
+  let dataToMap;
+  if (originalDataToMap) {
+    const editedDataToMap = originalDataToMap.filter(
+      obj => obj['category'] !== 'Income'
+    );
+    dataToMap = editedDataToMap.filter(obj => obj['amount'] !== 0);
+  }
 
   if (
     !dataToMap ||
@@ -56,17 +62,6 @@ const Chart = () => {
 
   const labels = dataToMap.map(item => item.category);
   const dataValues = dataToMap.map(item => item.amount);
-
-  console.log('labelki', labels);
-  console.log('wartości', dataValues);
-
-  const backgroundColors = [];
-  const numberOfColorsToGenerate = labels.length;
-
-  for (let i = 0; i < numberOfColorsToGenerate; i++) {
-    const color = getRandomColor(backgroundColors);
-    backgroundColors.push(color);
-  }
 
   const chartData = {
     labels: labels,
