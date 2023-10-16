@@ -28,7 +28,7 @@ const DashboardPage = () => {
     <>
       <Title as="h1">DashboardPage</Title>
       {isMobile ? <TransactionsMobile /> : <Transactions />}
-      {!isMobile && <ButtonAddTransaction />}
+      {isMobile && <ButtonAddTransaction />}
     </>
   );
 };
