@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 // import { resetSession } from 'redux/slices/sessionSlice';
 
 // export const API_URL = 'https://modern-gold-fatigues.cyclic.app';
-export const API_URL = '188.125.38.84:4000';
+export const API_URL = 'http://188.125.38.84:4000';
 
 const WalletInstance = axios.create();
 export { WalletInstance };
