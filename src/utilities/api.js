@@ -3,14 +3,12 @@ import Cookies from 'js-cookie';
 import { WalletInstance } from './authUtils';
 
 import { cookieOptions } from './authUtils';
-export const API_URL = 'https://modern-gold-fatigues.cyclic.app/api';
+// export const API_URL = 'https://modern-gold-fatigues.cyclic.app/api';
+export const API_URL = 'http://188.125.38.84:4000';
 setAuthToken();
 
 export const registerUser = async userData => {
-  const response = await WalletInstance.post(
-    `${API_URL}/users/register`,
-    userData
-  );
+  const response = await WalletInstance.post(`${API_URL}/users/register`, userData);
 
   const { accessToken } = response.data;
 
@@ -21,10 +19,7 @@ export const registerUser = async userData => {
 };
 
 export const loginUser = async loginData => {
-  const response = await WalletInstance.post(
-    `${API_URL}/users/login`,
-    loginData
-  );
+  const response = await WalletInstance.post(`${API_URL}/users/login`, loginData);
 
   const { token } = response.data;
 
@@ -47,10 +42,7 @@ export const logoutUser = async () => {
 };
 
 export const createTransaction = async transactionData => {
-  const response = await WalletInstance.post(
-    `${API_URL}/transactions`,
-    transactionData
-  );
+  const response = await WalletInstance.post(`${API_URL}/transactions`, transactionData);
   console.log('response from createTransaction', response);
 
   return response.data;
@@ -63,9 +55,7 @@ export const getTransactions = async () => {
 };
 
 export const deleteTransaction = async transactionId => {
-  const response = await WalletInstance.delete(
-    `${API_URL}/transactions/${transactionId}`
-  );
+  const response = await WalletInstance.delete(`${API_URL}/transactions/${transactionId}`);
 
   return response.data;
 };
@@ -80,25 +70,19 @@ export const updateTransaction = async (transactionId, updatedData) => {
 };
 
 export const filterTransactions = async (month, year) => {
-  const response = await WalletInstance.get(
-    `${API_URL}/transactions/${month}/${year}`
-  );
+  const response = await WalletInstance.get(`${API_URL}/transactions/${month}/${year}`);
 
   return response.data;
 };
 
 export const getCategoryTotals = async () => {
-  const response = await WalletInstance.get(
-    `${API_URL}/transactions/categories/totals`
-  );
+  const response = await WalletInstance.get(`${API_URL}/transactions/categories/totals`);
 
   return response.data;
 };
 
 export const getMonthlyCategoryTotals = async (month, year) => {
-  const response = await WalletInstance.get(
-    `${API_URL}/transactions/${month}/${year}`
-  );
+  const response = await WalletInstance.get(`${API_URL}/transactions/${month}/${year}`);
 
   return response.data;
 };
