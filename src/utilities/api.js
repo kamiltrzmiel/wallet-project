@@ -4,7 +4,7 @@ import { WalletInstance } from './authUtils';
 
 import { cookieOptions } from './authUtils';
 //export const API_URL = 'https://modern-gold-fatigues.cyclic.app';
-export const API_URL = 'https://188.125.38.84:4000';
+export const API_URL = 'https://dev.optiall.pl:4000';
 setAuthToken();
 
 export const registerUser = async userData => {
